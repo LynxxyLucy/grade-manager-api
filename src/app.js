@@ -1,6 +1,11 @@
 import express from "express";
 import path, { dirname, join } from "path";
 import { fileURLToPath } from "url";
+import authMiddleware from "./middleware/authMiddleware.js";
+import authRoutes from "./routes/authRoutes.js"; // Import auth routes
+import yearRoutes from "./routes/yearRoutes.js"; // Import year routes
+import subjectRoutes from "./routes/subjectRoutes.js"; // Import subject routes
+import gradeRoutes from "./routes/gradeRoutes.js"; // Import grade routes
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,14 +18,18 @@ app.use(express.static(staticPath));
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-/*
- * ENDPOINTSP
- */
-
 // GET endpoint to serve the index.html file
-app.get('/', (req, res) => {
-  res.sendFile(join(staticPath, "index.html"));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(staticPath, "index.html"));
 });
+
+/*
+ * API
+ */
+app.use("/auth", authRoutes);
+app.use("/years", authMiddleware, yearRoutes);
+app.use("/subjects", authMiddleware, subjectRoutes);
+app.use("/grades", authMiddleware, gradeRoutes);
 
 // Check if the server is running
 app.listen(PORT, () => {

@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model Year
+ * 
+ */
+export type Year = $Result.DefaultSelection<Prisma.$YearPayload>
+/**
  * Model Subject
  * 
  */
@@ -165,6 +170,16 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.year`: Exposes CRUD operations for the **Year** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Years
+    * const years = await prisma.year.findMany()
+    * ```
+    */
+  get year(): Prisma.YearDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.subject`: Exposes CRUD operations for the **Subject** model.
     * Example usage:
     * ```ts
@@ -241,8 +256,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.6.0
-   * Query Engine version: f676762280b54cd07c770017ed3711ddde35f37a
+   * Prisma Client JS version: 6.7.0
+   * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
    */
   export type PrismaVersion = {
     client: string
@@ -624,6 +639,7 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    Year: 'Year',
     Subject: 'Subject',
     Grade: 'Grade'
   };
@@ -644,7 +660,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "subject" | "grade"
+      modelProps: "user" | "year" | "subject" | "grade"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -719,6 +735,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      Year: {
+        payload: Prisma.$YearPayload<ExtArgs>
+        fields: Prisma.YearFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.YearFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YearPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.YearFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YearPayload>
+          }
+          findFirst: {
+            args: Prisma.YearFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YearPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.YearFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YearPayload>
+          }
+          findMany: {
+            args: Prisma.YearFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YearPayload>[]
+          }
+          create: {
+            args: Prisma.YearCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YearPayload>
+          }
+          createMany: {
+            args: Prisma.YearCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.YearCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YearPayload>[]
+          }
+          delete: {
+            args: Prisma.YearDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YearPayload>
+          }
+          update: {
+            args: Prisma.YearUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YearPayload>
+          }
+          deleteMany: {
+            args: Prisma.YearDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.YearUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.YearUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YearPayload>[]
+          }
+          upsert: {
+            args: Prisma.YearUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$YearPayload>
+          }
+          aggregate: {
+            args: Prisma.YearAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateYear>
+          }
+          groupBy: {
+            args: Prisma.YearGroupByArgs<ExtArgs>
+            result: $Utils.Optional<YearGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.YearCountArgs<ExtArgs>
+            result: $Utils.Optional<YearCountAggregateOutputType> | number
           }
         }
       }
@@ -955,6 +1045,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    year?: YearOmit
     subject?: SubjectOmit
     grade?: GradeOmit
   }
@@ -1051,11 +1142,11 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    subjects: number
+    years: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    subjects?: boolean | UserCountOutputTypeCountSubjectsArgs
+    years?: boolean | UserCountOutputTypeCountYearsArgs
   }
 
   // Custom InputTypes
@@ -1072,7 +1163,38 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountSubjectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeCountYearsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: YearWhereInput
+  }
+
+
+  /**
+   * Count Type YearCountOutputType
+   */
+
+  export type YearCountOutputType = {
+    subjects: number
+  }
+
+  export type YearCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    subjects?: boolean | YearCountOutputTypeCountSubjectsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * YearCountOutputType without action
+   */
+  export type YearCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the YearCountOutputType
+     */
+    select?: YearCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * YearCountOutputType without action
+   */
+  export type YearCountOutputTypeCountSubjectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SubjectWhereInput
   }
 
@@ -1292,7 +1414,7 @@ export namespace Prisma {
     password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    subjects?: boolean | User$subjectsArgs<ExtArgs>
+    years?: boolean | User$yearsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1328,7 +1450,7 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "username" | "password" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    subjects?: boolean | User$subjectsArgs<ExtArgs>
+    years?: boolean | User$yearsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1337,7 +1459,7 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      subjects: Prisma.$SubjectPayload<ExtArgs>[]
+      years: Prisma.$YearPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1741,7 +1863,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    subjects<T extends User$subjectsArgs<ExtArgs> = {}>(args?: Subset<T, User$subjectsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    years<T extends User$yearsArgs<ExtArgs> = {}>(args?: Subset<T, User$yearsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$YearPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2164,27 +2286,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.subjects
+   * User.years
    */
-  export type User$subjectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$yearsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Subject
+     * Select specific fields to fetch from the Year
      */
-    select?: SubjectSelect<ExtArgs> | null
+    select?: YearSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Subject
+     * Omit specific fields from the Year
      */
-    omit?: SubjectOmit<ExtArgs> | null
+    omit?: YearOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SubjectInclude<ExtArgs> | null
-    where?: SubjectWhereInput
-    orderBy?: SubjectOrderByWithRelationInput | SubjectOrderByWithRelationInput[]
-    cursor?: SubjectWhereUniqueInput
+    include?: YearInclude<ExtArgs> | null
+    where?: YearWhereInput
+    orderBy?: YearOrderByWithRelationInput | YearOrderByWithRelationInput[]
+    cursor?: YearWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: SubjectScalarFieldEnum | SubjectScalarFieldEnum[]
+    distinct?: YearScalarFieldEnum | YearScalarFieldEnum[]
   }
 
   /**
@@ -2207,6 +2329,1092 @@ export namespace Prisma {
 
 
   /**
+   * Model Year
+   */
+
+  export type AggregateYear = {
+    _count: YearCountAggregateOutputType | null
+    _min: YearMinAggregateOutputType | null
+    _max: YearMaxAggregateOutputType | null
+  }
+
+  export type YearMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
+  }
+
+  export type YearMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: string | null
+  }
+
+  export type YearCountAggregateOutputType = {
+    id: number
+    name: number
+    createdAt: number
+    updatedAt: number
+    userId: number
+    _all: number
+  }
+
+
+  export type YearMinAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+  }
+
+  export type YearMaxAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+  }
+
+  export type YearCountAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type YearAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Year to aggregate.
+     */
+    where?: YearWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Years to fetch.
+     */
+    orderBy?: YearOrderByWithRelationInput | YearOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: YearWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Years from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Years.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Years
+    **/
+    _count?: true | YearCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: YearMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: YearMaxAggregateInputType
+  }
+
+  export type GetYearAggregateType<T extends YearAggregateArgs> = {
+        [P in keyof T & keyof AggregateYear]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateYear[P]>
+      : GetScalarType<T[P], AggregateYear[P]>
+  }
+
+
+
+
+  export type YearGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: YearWhereInput
+    orderBy?: YearOrderByWithAggregationInput | YearOrderByWithAggregationInput[]
+    by: YearScalarFieldEnum[] | YearScalarFieldEnum
+    having?: YearScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: YearCountAggregateInputType | true
+    _min?: YearMinAggregateInputType
+    _max?: YearMaxAggregateInputType
+  }
+
+  export type YearGroupByOutputType = {
+    id: string
+    name: string
+    createdAt: Date
+    updatedAt: Date
+    userId: string
+    _count: YearCountAggregateOutputType | null
+    _min: YearMinAggregateOutputType | null
+    _max: YearMaxAggregateOutputType | null
+  }
+
+  type GetYearGroupByPayload<T extends YearGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<YearGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof YearGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], YearGroupByOutputType[P]>
+            : GetScalarType<T[P], YearGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type YearSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    subjects?: boolean | Year$subjectsArgs<ExtArgs>
+    _count?: boolean | YearCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["year"]>
+
+  export type YearSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["year"]>
+
+  export type YearSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["year"]>
+
+  export type YearSelectScalar = {
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+  }
+
+  export type YearOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["year"]>
+  export type YearInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    subjects?: boolean | Year$subjectsArgs<ExtArgs>
+    _count?: boolean | YearCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type YearIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type YearIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $YearPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Year"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      subjects: Prisma.$SubjectPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      createdAt: Date
+      updatedAt: Date
+      userId: string
+    }, ExtArgs["result"]["year"]>
+    composites: {}
+  }
+
+  type YearGetPayload<S extends boolean | null | undefined | YearDefaultArgs> = $Result.GetResult<Prisma.$YearPayload, S>
+
+  type YearCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<YearFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: YearCountAggregateInputType | true
+    }
+
+  export interface YearDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Year'], meta: { name: 'Year' } }
+    /**
+     * Find zero or one Year that matches the filter.
+     * @param {YearFindUniqueArgs} args - Arguments to find a Year
+     * @example
+     * // Get one Year
+     * const year = await prisma.year.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends YearFindUniqueArgs>(args: SelectSubset<T, YearFindUniqueArgs<ExtArgs>>): Prisma__YearClient<$Result.GetResult<Prisma.$YearPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Year that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {YearFindUniqueOrThrowArgs} args - Arguments to find a Year
+     * @example
+     * // Get one Year
+     * const year = await prisma.year.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends YearFindUniqueOrThrowArgs>(args: SelectSubset<T, YearFindUniqueOrThrowArgs<ExtArgs>>): Prisma__YearClient<$Result.GetResult<Prisma.$YearPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Year that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {YearFindFirstArgs} args - Arguments to find a Year
+     * @example
+     * // Get one Year
+     * const year = await prisma.year.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends YearFindFirstArgs>(args?: SelectSubset<T, YearFindFirstArgs<ExtArgs>>): Prisma__YearClient<$Result.GetResult<Prisma.$YearPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Year that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {YearFindFirstOrThrowArgs} args - Arguments to find a Year
+     * @example
+     * // Get one Year
+     * const year = await prisma.year.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends YearFindFirstOrThrowArgs>(args?: SelectSubset<T, YearFindFirstOrThrowArgs<ExtArgs>>): Prisma__YearClient<$Result.GetResult<Prisma.$YearPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Years that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {YearFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Years
+     * const years = await prisma.year.findMany()
+     * 
+     * // Get first 10 Years
+     * const years = await prisma.year.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const yearWithIdOnly = await prisma.year.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends YearFindManyArgs>(args?: SelectSubset<T, YearFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$YearPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Year.
+     * @param {YearCreateArgs} args - Arguments to create a Year.
+     * @example
+     * // Create one Year
+     * const Year = await prisma.year.create({
+     *   data: {
+     *     // ... data to create a Year
+     *   }
+     * })
+     * 
+     */
+    create<T extends YearCreateArgs>(args: SelectSubset<T, YearCreateArgs<ExtArgs>>): Prisma__YearClient<$Result.GetResult<Prisma.$YearPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Years.
+     * @param {YearCreateManyArgs} args - Arguments to create many Years.
+     * @example
+     * // Create many Years
+     * const year = await prisma.year.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends YearCreateManyArgs>(args?: SelectSubset<T, YearCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Years and returns the data saved in the database.
+     * @param {YearCreateManyAndReturnArgs} args - Arguments to create many Years.
+     * @example
+     * // Create many Years
+     * const year = await prisma.year.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Years and only return the `id`
+     * const yearWithIdOnly = await prisma.year.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends YearCreateManyAndReturnArgs>(args?: SelectSubset<T, YearCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$YearPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Year.
+     * @param {YearDeleteArgs} args - Arguments to delete one Year.
+     * @example
+     * // Delete one Year
+     * const Year = await prisma.year.delete({
+     *   where: {
+     *     // ... filter to delete one Year
+     *   }
+     * })
+     * 
+     */
+    delete<T extends YearDeleteArgs>(args: SelectSubset<T, YearDeleteArgs<ExtArgs>>): Prisma__YearClient<$Result.GetResult<Prisma.$YearPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Year.
+     * @param {YearUpdateArgs} args - Arguments to update one Year.
+     * @example
+     * // Update one Year
+     * const year = await prisma.year.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends YearUpdateArgs>(args: SelectSubset<T, YearUpdateArgs<ExtArgs>>): Prisma__YearClient<$Result.GetResult<Prisma.$YearPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Years.
+     * @param {YearDeleteManyArgs} args - Arguments to filter Years to delete.
+     * @example
+     * // Delete a few Years
+     * const { count } = await prisma.year.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends YearDeleteManyArgs>(args?: SelectSubset<T, YearDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Years.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {YearUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Years
+     * const year = await prisma.year.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends YearUpdateManyArgs>(args: SelectSubset<T, YearUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Years and returns the data updated in the database.
+     * @param {YearUpdateManyAndReturnArgs} args - Arguments to update many Years.
+     * @example
+     * // Update many Years
+     * const year = await prisma.year.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Years and only return the `id`
+     * const yearWithIdOnly = await prisma.year.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends YearUpdateManyAndReturnArgs>(args: SelectSubset<T, YearUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$YearPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Year.
+     * @param {YearUpsertArgs} args - Arguments to update or create a Year.
+     * @example
+     * // Update or create a Year
+     * const year = await prisma.year.upsert({
+     *   create: {
+     *     // ... data to create a Year
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Year we want to update
+     *   }
+     * })
+     */
+    upsert<T extends YearUpsertArgs>(args: SelectSubset<T, YearUpsertArgs<ExtArgs>>): Prisma__YearClient<$Result.GetResult<Prisma.$YearPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Years.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {YearCountArgs} args - Arguments to filter Years to count.
+     * @example
+     * // Count the number of Years
+     * const count = await prisma.year.count({
+     *   where: {
+     *     // ... the filter for the Years we want to count
+     *   }
+     * })
+    **/
+    count<T extends YearCountArgs>(
+      args?: Subset<T, YearCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], YearCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Year.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {YearAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends YearAggregateArgs>(args: Subset<T, YearAggregateArgs>): Prisma.PrismaPromise<GetYearAggregateType<T>>
+
+    /**
+     * Group by Year.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {YearGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends YearGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: YearGroupByArgs['orderBy'] }
+        : { orderBy?: YearGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, YearGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetYearGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Year model
+   */
+  readonly fields: YearFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Year.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__YearClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    subjects<T extends Year$subjectsArgs<ExtArgs> = {}>(args?: Subset<T, Year$subjectsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Year model
+   */
+  interface YearFieldRefs {
+    readonly id: FieldRef<"Year", 'String'>
+    readonly name: FieldRef<"Year", 'String'>
+    readonly createdAt: FieldRef<"Year", 'DateTime'>
+    readonly updatedAt: FieldRef<"Year", 'DateTime'>
+    readonly userId: FieldRef<"Year", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Year findUnique
+   */
+  export type YearFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Year
+     */
+    select?: YearSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Year
+     */
+    omit?: YearOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YearInclude<ExtArgs> | null
+    /**
+     * Filter, which Year to fetch.
+     */
+    where: YearWhereUniqueInput
+  }
+
+  /**
+   * Year findUniqueOrThrow
+   */
+  export type YearFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Year
+     */
+    select?: YearSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Year
+     */
+    omit?: YearOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YearInclude<ExtArgs> | null
+    /**
+     * Filter, which Year to fetch.
+     */
+    where: YearWhereUniqueInput
+  }
+
+  /**
+   * Year findFirst
+   */
+  export type YearFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Year
+     */
+    select?: YearSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Year
+     */
+    omit?: YearOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YearInclude<ExtArgs> | null
+    /**
+     * Filter, which Year to fetch.
+     */
+    where?: YearWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Years to fetch.
+     */
+    orderBy?: YearOrderByWithRelationInput | YearOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Years.
+     */
+    cursor?: YearWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Years from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Years.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Years.
+     */
+    distinct?: YearScalarFieldEnum | YearScalarFieldEnum[]
+  }
+
+  /**
+   * Year findFirstOrThrow
+   */
+  export type YearFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Year
+     */
+    select?: YearSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Year
+     */
+    omit?: YearOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YearInclude<ExtArgs> | null
+    /**
+     * Filter, which Year to fetch.
+     */
+    where?: YearWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Years to fetch.
+     */
+    orderBy?: YearOrderByWithRelationInput | YearOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Years.
+     */
+    cursor?: YearWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Years from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Years.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Years.
+     */
+    distinct?: YearScalarFieldEnum | YearScalarFieldEnum[]
+  }
+
+  /**
+   * Year findMany
+   */
+  export type YearFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Year
+     */
+    select?: YearSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Year
+     */
+    omit?: YearOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YearInclude<ExtArgs> | null
+    /**
+     * Filter, which Years to fetch.
+     */
+    where?: YearWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Years to fetch.
+     */
+    orderBy?: YearOrderByWithRelationInput | YearOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Years.
+     */
+    cursor?: YearWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Years from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Years.
+     */
+    skip?: number
+    distinct?: YearScalarFieldEnum | YearScalarFieldEnum[]
+  }
+
+  /**
+   * Year create
+   */
+  export type YearCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Year
+     */
+    select?: YearSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Year
+     */
+    omit?: YearOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YearInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Year.
+     */
+    data: XOR<YearCreateInput, YearUncheckedCreateInput>
+  }
+
+  /**
+   * Year createMany
+   */
+  export type YearCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Years.
+     */
+    data: YearCreateManyInput | YearCreateManyInput[]
+  }
+
+  /**
+   * Year createManyAndReturn
+   */
+  export type YearCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Year
+     */
+    select?: YearSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Year
+     */
+    omit?: YearOmit<ExtArgs> | null
+    /**
+     * The data used to create many Years.
+     */
+    data: YearCreateManyInput | YearCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YearIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Year update
+   */
+  export type YearUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Year
+     */
+    select?: YearSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Year
+     */
+    omit?: YearOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YearInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Year.
+     */
+    data: XOR<YearUpdateInput, YearUncheckedUpdateInput>
+    /**
+     * Choose, which Year to update.
+     */
+    where: YearWhereUniqueInput
+  }
+
+  /**
+   * Year updateMany
+   */
+  export type YearUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Years.
+     */
+    data: XOR<YearUpdateManyMutationInput, YearUncheckedUpdateManyInput>
+    /**
+     * Filter which Years to update
+     */
+    where?: YearWhereInput
+    /**
+     * Limit how many Years to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Year updateManyAndReturn
+   */
+  export type YearUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Year
+     */
+    select?: YearSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Year
+     */
+    omit?: YearOmit<ExtArgs> | null
+    /**
+     * The data used to update Years.
+     */
+    data: XOR<YearUpdateManyMutationInput, YearUncheckedUpdateManyInput>
+    /**
+     * Filter which Years to update
+     */
+    where?: YearWhereInput
+    /**
+     * Limit how many Years to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YearIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Year upsert
+   */
+  export type YearUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Year
+     */
+    select?: YearSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Year
+     */
+    omit?: YearOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YearInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Year to update in case it exists.
+     */
+    where: YearWhereUniqueInput
+    /**
+     * In case the Year found by the `where` argument doesn't exist, create a new Year with this data.
+     */
+    create: XOR<YearCreateInput, YearUncheckedCreateInput>
+    /**
+     * In case the Year was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<YearUpdateInput, YearUncheckedUpdateInput>
+  }
+
+  /**
+   * Year delete
+   */
+  export type YearDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Year
+     */
+    select?: YearSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Year
+     */
+    omit?: YearOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YearInclude<ExtArgs> | null
+    /**
+     * Filter which Year to delete.
+     */
+    where: YearWhereUniqueInput
+  }
+
+  /**
+   * Year deleteMany
+   */
+  export type YearDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Years to delete
+     */
+    where?: YearWhereInput
+    /**
+     * Limit how many Years to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Year.subjects
+   */
+  export type Year$subjectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Subject
+     */
+    select?: SubjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Subject
+     */
+    omit?: SubjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubjectInclude<ExtArgs> | null
+    where?: SubjectWhereInput
+    orderBy?: SubjectOrderByWithRelationInput | SubjectOrderByWithRelationInput[]
+    cursor?: SubjectWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SubjectScalarFieldEnum | SubjectScalarFieldEnum[]
+  }
+
+  /**
+   * Year without action
+   */
+  export type YearDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Year
+     */
+    select?: YearSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Year
+     */
+    omit?: YearOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: YearInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Subject
    */
 
@@ -2222,6 +3430,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     userId: string | null
+    yearId: string | null
   }
 
   export type SubjectMaxAggregateOutputType = {
@@ -2230,6 +3439,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     userId: string | null
+    yearId: string | null
   }
 
   export type SubjectCountAggregateOutputType = {
@@ -2238,6 +3448,7 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     userId: number
+    yearId: number
     _all: number
   }
 
@@ -2248,6 +3459,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     userId?: true
+    yearId?: true
   }
 
   export type SubjectMaxAggregateInputType = {
@@ -2256,6 +3468,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     userId?: true
+    yearId?: true
   }
 
   export type SubjectCountAggregateInputType = {
@@ -2264,6 +3477,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     userId?: true
+    yearId?: true
     _all?: true
   }
 
@@ -2345,6 +3559,7 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     userId: string
+    yearId: string
     _count: SubjectCountAggregateOutputType | null
     _min: SubjectMinAggregateOutputType | null
     _max: SubjectMaxAggregateOutputType | null
@@ -2370,7 +3585,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    yearId?: boolean
+    Year?: boolean | YearDefaultArgs<ExtArgs>
     grades?: boolean | Subject$gradesArgs<ExtArgs>
     _count?: boolean | SubjectCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subject"]>
@@ -2381,7 +3597,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    yearId?: boolean
+    Year?: boolean | YearDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subject"]>
 
   export type SubjectSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2390,7 +3607,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    yearId?: boolean
+    Year?: boolean | YearDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subject"]>
 
   export type SubjectSelectScalar = {
@@ -2399,25 +3617,26 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
+    yearId?: boolean
   }
 
-  export type SubjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["subject"]>
+  export type SubjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "userId" | "yearId", ExtArgs["result"]["subject"]>
   export type SubjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    Year?: boolean | YearDefaultArgs<ExtArgs>
     grades?: boolean | Subject$gradesArgs<ExtArgs>
     _count?: boolean | SubjectCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SubjectIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    Year?: boolean | YearDefaultArgs<ExtArgs>
   }
   export type SubjectIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    Year?: boolean | YearDefaultArgs<ExtArgs>
   }
 
   export type $SubjectPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Subject"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
+      Year: Prisma.$YearPayload<ExtArgs>
       grades: Prisma.$GradePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -2426,6 +3645,7 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       userId: string
+      yearId: string
     }, ExtArgs["result"]["subject"]>
     composites: {}
   }
@@ -2820,7 +4040,7 @@ export namespace Prisma {
    */
   export interface Prisma__SubjectClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Year<T extends YearDefaultArgs<ExtArgs> = {}>(args?: Subset<T, YearDefaultArgs<ExtArgs>>): Prisma__YearClient<$Result.GetResult<Prisma.$YearPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     grades<T extends Subject$gradesArgs<ExtArgs> = {}>(args?: Subset<T, Subject$gradesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GradePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2856,6 +4076,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Subject", 'DateTime'>
     readonly updatedAt: FieldRef<"Subject", 'DateTime'>
     readonly userId: FieldRef<"Subject", 'String'>
+    readonly yearId: FieldRef<"Subject", 'String'>
   }
     
 
@@ -4419,12 +5640,24 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-  export const SubjectScalarFieldEnum: {
+  export const YearScalarFieldEnum: {
     id: 'id',
     name: 'name',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     userId: 'userId'
+  };
+
+  export type YearScalarFieldEnum = (typeof YearScalarFieldEnum)[keyof typeof YearScalarFieldEnum]
+
+
+  export const SubjectScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    userId: 'userId',
+    yearId: 'yearId'
   };
 
   export type SubjectScalarFieldEnum = (typeof SubjectScalarFieldEnum)[keyof typeof SubjectScalarFieldEnum]
@@ -4497,7 +5730,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    subjects?: SubjectListRelationFilter
+    years?: YearListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -4508,7 +5741,7 @@ export namespace Prisma {
     password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    subjects?: SubjectOrderByRelationAggregateInput
+    years?: YearOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -4522,7 +5755,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    subjects?: SubjectListRelationFilter
+    years?: YearListRelationFilter
   }, "id" | "email" | "username">
 
   export type UserOrderByWithAggregationInput = {
@@ -4551,6 +5784,64 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
+  export type YearWhereInput = {
+    AND?: YearWhereInput | YearWhereInput[]
+    OR?: YearWhereInput[]
+    NOT?: YearWhereInput | YearWhereInput[]
+    id?: StringFilter<"Year"> | string
+    name?: StringFilter<"Year"> | string
+    createdAt?: DateTimeFilter<"Year"> | Date | string
+    updatedAt?: DateTimeFilter<"Year"> | Date | string
+    userId?: StringFilter<"Year"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    subjects?: SubjectListRelationFilter
+  }
+
+  export type YearOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
+    subjects?: SubjectOrderByRelationAggregateInput
+  }
+
+  export type YearWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: YearWhereInput | YearWhereInput[]
+    OR?: YearWhereInput[]
+    NOT?: YearWhereInput | YearWhereInput[]
+    name?: StringFilter<"Year"> | string
+    createdAt?: DateTimeFilter<"Year"> | Date | string
+    updatedAt?: DateTimeFilter<"Year"> | Date | string
+    userId?: StringFilter<"Year"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    subjects?: SubjectListRelationFilter
+  }, "id">
+
+  export type YearOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    _count?: YearCountOrderByAggregateInput
+    _max?: YearMaxOrderByAggregateInput
+    _min?: YearMinOrderByAggregateInput
+  }
+
+  export type YearScalarWhereWithAggregatesInput = {
+    AND?: YearScalarWhereWithAggregatesInput | YearScalarWhereWithAggregatesInput[]
+    OR?: YearScalarWhereWithAggregatesInput[]
+    NOT?: YearScalarWhereWithAggregatesInput | YearScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Year"> | string
+    name?: StringWithAggregatesFilter<"Year"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Year"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Year"> | Date | string
+    userId?: StringWithAggregatesFilter<"Year"> | string
+  }
+
   export type SubjectWhereInput = {
     AND?: SubjectWhereInput | SubjectWhereInput[]
     OR?: SubjectWhereInput[]
@@ -4560,7 +5851,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Subject"> | Date | string
     updatedAt?: DateTimeFilter<"Subject"> | Date | string
     userId?: StringFilter<"Subject"> | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    yearId?: StringFilter<"Subject"> | string
+    Year?: XOR<YearScalarRelationFilter, YearWhereInput>
     grades?: GradeListRelationFilter
   }
 
@@ -4570,7 +5862,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
-    user?: UserOrderByWithRelationInput
+    yearId?: SortOrder
+    Year?: YearOrderByWithRelationInput
     grades?: GradeOrderByRelationAggregateInput
   }
 
@@ -4583,7 +5876,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Subject"> | Date | string
     updatedAt?: DateTimeFilter<"Subject"> | Date | string
     userId?: StringFilter<"Subject"> | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    yearId?: StringFilter<"Subject"> | string
+    Year?: XOR<YearScalarRelationFilter, YearWhereInput>
     grades?: GradeListRelationFilter
   }, "id">
 
@@ -4593,6 +5887,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
+    yearId?: SortOrder
     _count?: SubjectCountOrderByAggregateInput
     _max?: SubjectMaxOrderByAggregateInput
     _min?: SubjectMinOrderByAggregateInput
@@ -4607,6 +5902,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Subject"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Subject"> | Date | string
     userId?: StringWithAggregatesFilter<"Subject"> | string
+    yearId?: StringWithAggregatesFilter<"Subject"> | string
   }
 
   export type GradeWhereInput = {
@@ -4679,7 +5975,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    subjects?: SubjectCreateNestedManyWithoutUserInput
+    years?: YearCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -4690,7 +5986,7 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    subjects?: SubjectUncheckedCreateNestedManyWithoutUserInput
+    years?: YearUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -4701,7 +5997,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subjects?: SubjectUpdateManyWithoutUserNestedInput
+    years?: YearUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -4712,7 +6008,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subjects?: SubjectUncheckedUpdateManyWithoutUserNestedInput
+    years?: YearUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -4745,12 +6041,72 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type YearCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutYearsInput
+    subjects?: SubjectCreateNestedManyWithoutYearInput
+  }
+
+  export type YearUncheckedCreateInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+    subjects?: SubjectUncheckedCreateNestedManyWithoutYearInput
+  }
+
+  export type YearUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutYearsNestedInput
+    subjects?: SubjectUpdateManyWithoutYearNestedInput
+  }
+
+  export type YearUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    subjects?: SubjectUncheckedUpdateManyWithoutYearNestedInput
+  }
+
+  export type YearCreateManyInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+  }
+
+  export type YearUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type YearUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type SubjectCreateInput = {
     id?: string
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutSubjectsInput
+    userId: string
+    Year: YearCreateNestedOneWithoutSubjectsInput
     grades?: GradeCreateNestedManyWithoutSubjectInput
   }
 
@@ -4760,6 +6116,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: string
+    yearId: string
     grades?: GradeUncheckedCreateNestedManyWithoutSubjectInput
   }
 
@@ -4768,7 +6125,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutSubjectsNestedInput
+    userId?: StringFieldUpdateOperationsInput | string
+    Year?: YearUpdateOneRequiredWithoutSubjectsNestedInput
     grades?: GradeUpdateManyWithoutSubjectNestedInput
   }
 
@@ -4778,6 +6136,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
+    yearId?: StringFieldUpdateOperationsInput | string
     grades?: GradeUncheckedUpdateManyWithoutSubjectNestedInput
   }
 
@@ -4787,6 +6146,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: string
+    yearId: string
   }
 
   export type SubjectUpdateManyMutationInput = {
@@ -4794,6 +6154,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type SubjectUncheckedUpdateManyInput = {
@@ -4802,6 +6163,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
+    yearId?: StringFieldUpdateOperationsInput | string
   }
 
   export type GradeCreateInput = {
@@ -4891,13 +6253,13 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type SubjectListRelationFilter = {
-    every?: SubjectWhereInput
-    some?: SubjectWhereInput
-    none?: SubjectWhereInput
+  export type YearListRelationFilter = {
+    every?: YearWhereInput
+    some?: YearWhereInput
+    none?: YearWhereInput
   }
 
-  export type SubjectOrderByRelationAggregateInput = {
+  export type YearOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -4967,6 +6329,45 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
+  export type SubjectListRelationFilter = {
+    every?: SubjectWhereInput
+    some?: SubjectWhereInput
+    none?: SubjectWhereInput
+  }
+
+  export type SubjectOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type YearCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type YearMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type YearMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type YearScalarRelationFilter = {
+    is?: YearWhereInput
+    isNot?: YearWhereInput
+  }
+
   export type GradeListRelationFilter = {
     every?: GradeWhereInput
     some?: GradeWhereInput
@@ -4983,6 +6384,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
+    yearId?: SortOrder
   }
 
   export type SubjectMaxOrderByAggregateInput = {
@@ -4991,6 +6393,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
+    yearId?: SortOrder
   }
 
   export type SubjectMinOrderByAggregateInput = {
@@ -4999,6 +6402,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
+    yearId?: SortOrder
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -5068,18 +6472,18 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type SubjectCreateNestedManyWithoutUserInput = {
-    create?: XOR<SubjectCreateWithoutUserInput, SubjectUncheckedCreateWithoutUserInput> | SubjectCreateWithoutUserInput[] | SubjectUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SubjectCreateOrConnectWithoutUserInput | SubjectCreateOrConnectWithoutUserInput[]
-    createMany?: SubjectCreateManyUserInputEnvelope
-    connect?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
+  export type YearCreateNestedManyWithoutUserInput = {
+    create?: XOR<YearCreateWithoutUserInput, YearUncheckedCreateWithoutUserInput> | YearCreateWithoutUserInput[] | YearUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: YearCreateOrConnectWithoutUserInput | YearCreateOrConnectWithoutUserInput[]
+    createMany?: YearCreateManyUserInputEnvelope
+    connect?: YearWhereUniqueInput | YearWhereUniqueInput[]
   }
 
-  export type SubjectUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<SubjectCreateWithoutUserInput, SubjectUncheckedCreateWithoutUserInput> | SubjectCreateWithoutUserInput[] | SubjectUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SubjectCreateOrConnectWithoutUserInput | SubjectCreateOrConnectWithoutUserInput[]
-    createMany?: SubjectCreateManyUserInputEnvelope
-    connect?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
+  export type YearUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<YearCreateWithoutUserInput, YearUncheckedCreateWithoutUserInput> | YearCreateWithoutUserInput[] | YearUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: YearCreateOrConnectWithoutUserInput | YearCreateOrConnectWithoutUserInput[]
+    createMany?: YearCreateManyUserInputEnvelope
+    connect?: YearWhereUniqueInput | YearWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -5090,38 +6494,94 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type SubjectUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SubjectCreateWithoutUserInput, SubjectUncheckedCreateWithoutUserInput> | SubjectCreateWithoutUserInput[] | SubjectUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SubjectCreateOrConnectWithoutUserInput | SubjectCreateOrConnectWithoutUserInput[]
-    upsert?: SubjectUpsertWithWhereUniqueWithoutUserInput | SubjectUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SubjectCreateManyUserInputEnvelope
-    set?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
-    disconnect?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
-    delete?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
-    connect?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
-    update?: SubjectUpdateWithWhereUniqueWithoutUserInput | SubjectUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SubjectUpdateManyWithWhereWithoutUserInput | SubjectUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SubjectScalarWhereInput | SubjectScalarWhereInput[]
+  export type YearUpdateManyWithoutUserNestedInput = {
+    create?: XOR<YearCreateWithoutUserInput, YearUncheckedCreateWithoutUserInput> | YearCreateWithoutUserInput[] | YearUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: YearCreateOrConnectWithoutUserInput | YearCreateOrConnectWithoutUserInput[]
+    upsert?: YearUpsertWithWhereUniqueWithoutUserInput | YearUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: YearCreateManyUserInputEnvelope
+    set?: YearWhereUniqueInput | YearWhereUniqueInput[]
+    disconnect?: YearWhereUniqueInput | YearWhereUniqueInput[]
+    delete?: YearWhereUniqueInput | YearWhereUniqueInput[]
+    connect?: YearWhereUniqueInput | YearWhereUniqueInput[]
+    update?: YearUpdateWithWhereUniqueWithoutUserInput | YearUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: YearUpdateManyWithWhereWithoutUserInput | YearUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: YearScalarWhereInput | YearScalarWhereInput[]
   }
 
-  export type SubjectUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SubjectCreateWithoutUserInput, SubjectUncheckedCreateWithoutUserInput> | SubjectCreateWithoutUserInput[] | SubjectUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SubjectCreateOrConnectWithoutUserInput | SubjectCreateOrConnectWithoutUserInput[]
-    upsert?: SubjectUpsertWithWhereUniqueWithoutUserInput | SubjectUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SubjectCreateManyUserInputEnvelope
-    set?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
-    disconnect?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
-    delete?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
-    connect?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
-    update?: SubjectUpdateWithWhereUniqueWithoutUserInput | SubjectUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SubjectUpdateManyWithWhereWithoutUserInput | SubjectUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SubjectScalarWhereInput | SubjectScalarWhereInput[]
+  export type YearUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<YearCreateWithoutUserInput, YearUncheckedCreateWithoutUserInput> | YearCreateWithoutUserInput[] | YearUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: YearCreateOrConnectWithoutUserInput | YearCreateOrConnectWithoutUserInput[]
+    upsert?: YearUpsertWithWhereUniqueWithoutUserInput | YearUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: YearCreateManyUserInputEnvelope
+    set?: YearWhereUniqueInput | YearWhereUniqueInput[]
+    disconnect?: YearWhereUniqueInput | YearWhereUniqueInput[]
+    delete?: YearWhereUniqueInput | YearWhereUniqueInput[]
+    connect?: YearWhereUniqueInput | YearWhereUniqueInput[]
+    update?: YearUpdateWithWhereUniqueWithoutUserInput | YearUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: YearUpdateManyWithWhereWithoutUserInput | YearUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: YearScalarWhereInput | YearScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutSubjectsInput = {
-    create?: XOR<UserCreateWithoutSubjectsInput, UserUncheckedCreateWithoutSubjectsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutSubjectsInput
+  export type UserCreateNestedOneWithoutYearsInput = {
+    create?: XOR<UserCreateWithoutYearsInput, UserUncheckedCreateWithoutYearsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutYearsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type SubjectCreateNestedManyWithoutYearInput = {
+    create?: XOR<SubjectCreateWithoutYearInput, SubjectUncheckedCreateWithoutYearInput> | SubjectCreateWithoutYearInput[] | SubjectUncheckedCreateWithoutYearInput[]
+    connectOrCreate?: SubjectCreateOrConnectWithoutYearInput | SubjectCreateOrConnectWithoutYearInput[]
+    createMany?: SubjectCreateManyYearInputEnvelope
+    connect?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
+  }
+
+  export type SubjectUncheckedCreateNestedManyWithoutYearInput = {
+    create?: XOR<SubjectCreateWithoutYearInput, SubjectUncheckedCreateWithoutYearInput> | SubjectCreateWithoutYearInput[] | SubjectUncheckedCreateWithoutYearInput[]
+    connectOrCreate?: SubjectCreateOrConnectWithoutYearInput | SubjectCreateOrConnectWithoutYearInput[]
+    createMany?: SubjectCreateManyYearInputEnvelope
+    connect?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutYearsNestedInput = {
+    create?: XOR<UserCreateWithoutYearsInput, UserUncheckedCreateWithoutYearsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutYearsInput
+    upsert?: UserUpsertWithoutYearsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutYearsInput, UserUpdateWithoutYearsInput>, UserUncheckedUpdateWithoutYearsInput>
+  }
+
+  export type SubjectUpdateManyWithoutYearNestedInput = {
+    create?: XOR<SubjectCreateWithoutYearInput, SubjectUncheckedCreateWithoutYearInput> | SubjectCreateWithoutYearInput[] | SubjectUncheckedCreateWithoutYearInput[]
+    connectOrCreate?: SubjectCreateOrConnectWithoutYearInput | SubjectCreateOrConnectWithoutYearInput[]
+    upsert?: SubjectUpsertWithWhereUniqueWithoutYearInput | SubjectUpsertWithWhereUniqueWithoutYearInput[]
+    createMany?: SubjectCreateManyYearInputEnvelope
+    set?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
+    disconnect?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
+    delete?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
+    connect?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
+    update?: SubjectUpdateWithWhereUniqueWithoutYearInput | SubjectUpdateWithWhereUniqueWithoutYearInput[]
+    updateMany?: SubjectUpdateManyWithWhereWithoutYearInput | SubjectUpdateManyWithWhereWithoutYearInput[]
+    deleteMany?: SubjectScalarWhereInput | SubjectScalarWhereInput[]
+  }
+
+  export type SubjectUncheckedUpdateManyWithoutYearNestedInput = {
+    create?: XOR<SubjectCreateWithoutYearInput, SubjectUncheckedCreateWithoutYearInput> | SubjectCreateWithoutYearInput[] | SubjectUncheckedCreateWithoutYearInput[]
+    connectOrCreate?: SubjectCreateOrConnectWithoutYearInput | SubjectCreateOrConnectWithoutYearInput[]
+    upsert?: SubjectUpsertWithWhereUniqueWithoutYearInput | SubjectUpsertWithWhereUniqueWithoutYearInput[]
+    createMany?: SubjectCreateManyYearInputEnvelope
+    set?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
+    disconnect?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
+    delete?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
+    connect?: SubjectWhereUniqueInput | SubjectWhereUniqueInput[]
+    update?: SubjectUpdateWithWhereUniqueWithoutYearInput | SubjectUpdateWithWhereUniqueWithoutYearInput[]
+    updateMany?: SubjectUpdateManyWithWhereWithoutYearInput | SubjectUpdateManyWithWhereWithoutYearInput[]
+    deleteMany?: SubjectScalarWhereInput | SubjectScalarWhereInput[]
+  }
+
+  export type YearCreateNestedOneWithoutSubjectsInput = {
+    create?: XOR<YearCreateWithoutSubjectsInput, YearUncheckedCreateWithoutSubjectsInput>
+    connectOrCreate?: YearCreateOrConnectWithoutSubjectsInput
+    connect?: YearWhereUniqueInput
   }
 
   export type GradeCreateNestedManyWithoutSubjectInput = {
@@ -5138,12 +6598,12 @@ export namespace Prisma {
     connect?: GradeWhereUniqueInput | GradeWhereUniqueInput[]
   }
 
-  export type UserUpdateOneRequiredWithoutSubjectsNestedInput = {
-    create?: XOR<UserCreateWithoutSubjectsInput, UserUncheckedCreateWithoutSubjectsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutSubjectsInput
-    upsert?: UserUpsertWithoutSubjectsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSubjectsInput, UserUpdateWithoutSubjectsInput>, UserUncheckedUpdateWithoutSubjectsInput>
+  export type YearUpdateOneRequiredWithoutSubjectsNestedInput = {
+    create?: XOR<YearCreateWithoutSubjectsInput, YearUncheckedCreateWithoutSubjectsInput>
+    connectOrCreate?: YearCreateOrConnectWithoutSubjectsInput
+    upsert?: YearUpsertWithoutSubjectsInput
+    connect?: YearWhereUniqueInput
+    update?: XOR<XOR<YearUpdateToOneWithWhereWithoutSubjectsInput, YearUpdateWithoutSubjectsInput>, YearUncheckedUpdateWithoutSubjectsInput>
   }
 
   export type GradeUpdateManyWithoutSubjectNestedInput = {
@@ -5290,45 +6750,155 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type SubjectCreateWithoutUserInput = {
+  export type YearCreateWithoutUserInput = {
     id?: string
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    subjects?: SubjectCreateNestedManyWithoutYearInput
+  }
+
+  export type YearUncheckedCreateWithoutUserInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    subjects?: SubjectUncheckedCreateNestedManyWithoutYearInput
+  }
+
+  export type YearCreateOrConnectWithoutUserInput = {
+    where: YearWhereUniqueInput
+    create: XOR<YearCreateWithoutUserInput, YearUncheckedCreateWithoutUserInput>
+  }
+
+  export type YearCreateManyUserInputEnvelope = {
+    data: YearCreateManyUserInput | YearCreateManyUserInput[]
+  }
+
+  export type YearUpsertWithWhereUniqueWithoutUserInput = {
+    where: YearWhereUniqueInput
+    update: XOR<YearUpdateWithoutUserInput, YearUncheckedUpdateWithoutUserInput>
+    create: XOR<YearCreateWithoutUserInput, YearUncheckedCreateWithoutUserInput>
+  }
+
+  export type YearUpdateWithWhereUniqueWithoutUserInput = {
+    where: YearWhereUniqueInput
+    data: XOR<YearUpdateWithoutUserInput, YearUncheckedUpdateWithoutUserInput>
+  }
+
+  export type YearUpdateManyWithWhereWithoutUserInput = {
+    where: YearScalarWhereInput
+    data: XOR<YearUpdateManyMutationInput, YearUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type YearScalarWhereInput = {
+    AND?: YearScalarWhereInput | YearScalarWhereInput[]
+    OR?: YearScalarWhereInput[]
+    NOT?: YearScalarWhereInput | YearScalarWhereInput[]
+    id?: StringFilter<"Year"> | string
+    name?: StringFilter<"Year"> | string
+    createdAt?: DateTimeFilter<"Year"> | Date | string
+    updatedAt?: DateTimeFilter<"Year"> | Date | string
+    userId?: StringFilter<"Year"> | string
+  }
+
+  export type UserCreateWithoutYearsInput = {
+    id?: string
+    name: string
+    email: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserUncheckedCreateWithoutYearsInput = {
+    id?: string
+    name: string
+    email: string
+    username: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserCreateOrConnectWithoutYearsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutYearsInput, UserUncheckedCreateWithoutYearsInput>
+  }
+
+  export type SubjectCreateWithoutYearInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
     grades?: GradeCreateNestedManyWithoutSubjectInput
   }
 
-  export type SubjectUncheckedCreateWithoutUserInput = {
+  export type SubjectUncheckedCreateWithoutYearInput = {
     id?: string
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
     grades?: GradeUncheckedCreateNestedManyWithoutSubjectInput
   }
 
-  export type SubjectCreateOrConnectWithoutUserInput = {
+  export type SubjectCreateOrConnectWithoutYearInput = {
     where: SubjectWhereUniqueInput
-    create: XOR<SubjectCreateWithoutUserInput, SubjectUncheckedCreateWithoutUserInput>
+    create: XOR<SubjectCreateWithoutYearInput, SubjectUncheckedCreateWithoutYearInput>
   }
 
-  export type SubjectCreateManyUserInputEnvelope = {
-    data: SubjectCreateManyUserInput | SubjectCreateManyUserInput[]
+  export type SubjectCreateManyYearInputEnvelope = {
+    data: SubjectCreateManyYearInput | SubjectCreateManyYearInput[]
   }
 
-  export type SubjectUpsertWithWhereUniqueWithoutUserInput = {
+  export type UserUpsertWithoutYearsInput = {
+    update: XOR<UserUpdateWithoutYearsInput, UserUncheckedUpdateWithoutYearsInput>
+    create: XOR<UserCreateWithoutYearsInput, UserUncheckedCreateWithoutYearsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutYearsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutYearsInput, UserUncheckedUpdateWithoutYearsInput>
+  }
+
+  export type UserUpdateWithoutYearsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUncheckedUpdateWithoutYearsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SubjectUpsertWithWhereUniqueWithoutYearInput = {
     where: SubjectWhereUniqueInput
-    update: XOR<SubjectUpdateWithoutUserInput, SubjectUncheckedUpdateWithoutUserInput>
-    create: XOR<SubjectCreateWithoutUserInput, SubjectUncheckedCreateWithoutUserInput>
+    update: XOR<SubjectUpdateWithoutYearInput, SubjectUncheckedUpdateWithoutYearInput>
+    create: XOR<SubjectCreateWithoutYearInput, SubjectUncheckedCreateWithoutYearInput>
   }
 
-  export type SubjectUpdateWithWhereUniqueWithoutUserInput = {
+  export type SubjectUpdateWithWhereUniqueWithoutYearInput = {
     where: SubjectWhereUniqueInput
-    data: XOR<SubjectUpdateWithoutUserInput, SubjectUncheckedUpdateWithoutUserInput>
+    data: XOR<SubjectUpdateWithoutYearInput, SubjectUncheckedUpdateWithoutYearInput>
   }
 
-  export type SubjectUpdateManyWithWhereWithoutUserInput = {
+  export type SubjectUpdateManyWithWhereWithoutYearInput = {
     where: SubjectScalarWhereInput
-    data: XOR<SubjectUpdateManyMutationInput, SubjectUncheckedUpdateManyWithoutUserInput>
+    data: XOR<SubjectUpdateManyMutationInput, SubjectUncheckedUpdateManyWithoutYearInput>
   }
 
   export type SubjectScalarWhereInput = {
@@ -5340,31 +6910,28 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Subject"> | Date | string
     updatedAt?: DateTimeFilter<"Subject"> | Date | string
     userId?: StringFilter<"Subject"> | string
+    yearId?: StringFilter<"Subject"> | string
   }
 
-  export type UserCreateWithoutSubjectsInput = {
+  export type YearCreateWithoutSubjectsInput = {
     id?: string
     name: string
-    email: string
-    username: string
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutYearsInput
   }
 
-  export type UserUncheckedCreateWithoutSubjectsInput = {
+  export type YearUncheckedCreateWithoutSubjectsInput = {
     id?: string
     name: string
-    email: string
-    username: string
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    userId: string
   }
 
-  export type UserCreateOrConnectWithoutSubjectsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutSubjectsInput, UserUncheckedCreateWithoutSubjectsInput>
+  export type YearCreateOrConnectWithoutSubjectsInput = {
+    where: YearWhereUniqueInput
+    create: XOR<YearCreateWithoutSubjectsInput, YearUncheckedCreateWithoutSubjectsInput>
   }
 
   export type GradeCreateWithoutSubjectInput = {
@@ -5392,35 +6959,31 @@ export namespace Prisma {
     data: GradeCreateManySubjectInput | GradeCreateManySubjectInput[]
   }
 
-  export type UserUpsertWithoutSubjectsInput = {
-    update: XOR<UserUpdateWithoutSubjectsInput, UserUncheckedUpdateWithoutSubjectsInput>
-    create: XOR<UserCreateWithoutSubjectsInput, UserUncheckedCreateWithoutSubjectsInput>
-    where?: UserWhereInput
+  export type YearUpsertWithoutSubjectsInput = {
+    update: XOR<YearUpdateWithoutSubjectsInput, YearUncheckedUpdateWithoutSubjectsInput>
+    create: XOR<YearCreateWithoutSubjectsInput, YearUncheckedCreateWithoutSubjectsInput>
+    where?: YearWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutSubjectsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutSubjectsInput, UserUncheckedUpdateWithoutSubjectsInput>
+  export type YearUpdateToOneWithWhereWithoutSubjectsInput = {
+    where?: YearWhereInput
+    data: XOR<YearUpdateWithoutSubjectsInput, YearUncheckedUpdateWithoutSubjectsInput>
   }
 
-  export type UserUpdateWithoutSubjectsInput = {
+  export type YearUpdateWithoutSubjectsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutYearsNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutSubjectsInput = {
+  export type YearUncheckedUpdateWithoutSubjectsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type GradeUpsertWithWhereUniqueWithoutSubjectInput = {
@@ -5456,7 +7019,8 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutSubjectsInput
+    userId: string
+    Year: YearCreateNestedOneWithoutSubjectsInput
   }
 
   export type SubjectUncheckedCreateWithoutGradesInput = {
@@ -5465,6 +7029,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: string
+    yearId: string
   }
 
   export type SubjectCreateOrConnectWithoutGradesInput = {
@@ -5488,7 +7053,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutSubjectsNestedInput
+    userId?: StringFieldUpdateOperationsInput | string
+    Year?: YearUpdateOneRequiredWithoutSubjectsNestedInput
   }
 
   export type SubjectUncheckedUpdateWithoutGradesInput = {
@@ -5497,36 +7063,71 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
+    yearId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type SubjectCreateManyUserInput = {
+  export type YearCreateManyUserInput = {
     id?: string
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type SubjectUpdateWithoutUserInput = {
+  export type YearUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subjects?: SubjectUpdateManyWithoutYearNestedInput
+  }
+
+  export type YearUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subjects?: SubjectUncheckedUpdateManyWithoutYearNestedInput
+  }
+
+  export type YearUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SubjectCreateManyYearInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: string
+  }
+
+  export type SubjectUpdateWithoutYearInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
     grades?: GradeUpdateManyWithoutSubjectNestedInput
   }
 
-  export type SubjectUncheckedUpdateWithoutUserInput = {
+  export type SubjectUncheckedUpdateWithoutYearInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
     grades?: GradeUncheckedUpdateManyWithoutSubjectNestedInput
   }
 
-  export type SubjectUncheckedUpdateManyWithoutUserInput = {
+  export type SubjectUncheckedUpdateManyWithoutYearInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type GradeCreateManySubjectInput = {

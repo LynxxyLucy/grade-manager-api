@@ -1,0 +1,107 @@
+import express from "express";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import prisma from "../prismaClient.js"; // Import the Prisma client
+
+const router = express.Router();
+
+/*
+ * Register a new user
+ */
+router.post("/register", async (req, res) => {
+  const { name, email, username, password } = req.body; // destructure request body
+  console.log(req.body);
+
+  try {
+    // Check if the user already exists
+    const existingUser = async () => {
+      await prisma.user.findUnique({
+        where: {
+          OR: [{ email: email }, { username: username }],
+        },
+      });
+    };
+
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" }); // Bad Request
+    }
+
+    // Hash the password
+    const hashedPassword = bcrypt.hashSync(password, 16);
+
+    // Create a new user
+    const newUser = await prisma.user.create({
+      data: {
+        name: name,
+        email: email,
+        username: username,
+        password: hashedPassword,
+      },
+    });
+
+    // Generate a JWT token
+    const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {
+      expiresIn: "24h",
+    });
+
+    // Send the token and user data in the response
+    res.status(201).json({
+      token,
+      user: {
+        username: newUser.username,
+        email: newUser.email,
+        username: newUser.username,
+      },
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.sendStatus(500); // Internal Server Error
+  }
+});
+
+/*
+ * Login a user
+ */
+router.post("/login", async (req, res) => {
+  // Destructure request body
+  const { email, username, password } = req.body;
+  let user;
+
+  try {
+    // Check if the user exists
+    const identifier = email ? { email } : { username }; // Use email or username to find the user
+    user = await prisma.user.findUnique({
+      where: identifier,
+    });
+
+    // If user not found, return error
+    if (!user) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    // Compare the password with the hashed password
+    const isPasswordValid = bcrypt.compareSync(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    // Generate a JWT token
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+      expiresIn: "24h",
+    });
+
+    // Send the token and user data in the response
+    res.status(200).json({
+      token,
+      user: {
+        username: user.username,
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    console.log(error.message);
+    return res.sendStatus(500); // Internal Server Error
+  }
+});
+
+export default router;
