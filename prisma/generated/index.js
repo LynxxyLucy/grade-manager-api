@@ -166,7 +166,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
+    "rootEnvPath": "../../.env",
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "..",
@@ -185,8 +185,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        String     @id @default(cuid())\n  name      String\n  email     String     @unique\n  username  String     @unique\n  password  String\n  createdAt DateTime   @default(now())\n  updatedAt DateTime   @updatedAt\n  semesters Semester[]\n}\n\nmodel Semester {\n  id        String    @id @default(cuid())\n  semester  String    @unique\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  userId    String\n  user      User      @relation(fields: [userId], references: [id])\n  subjects  Subject[]\n}\n\nmodel Subject {\n  id         String   @id @default(cuid())\n  name       String\n  createdAt  DateTime @default(now())\n  updatedAt  DateTime @updatedAt\n  semesterId String\n  semester   Semester @relation(fields: [semesterId], references: [id])\n  grades     Grade[]\n}\n\nmodel Grade {\n  id        String   @id @default(cuid())\n  name      String\n  value     Int\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  subjectId String\n  subject   Subject  @relation(fields: [subjectId], references: [id])\n}\n",
-  "inlineSchemaHash": "f8c22f1fc0a9a0eae8c353afae6c17245a52862e4aa26fdf6abd0e7ebbe2a376",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        String     @id @default(cuid())\n  name      String\n  email     String     @unique\n  username  String     @unique\n  password  String\n  createdAt DateTime   @default(now()) // UTC\n  updatedAt DateTime   @updatedAt // UTC\n  semesters Semester[]\n}\n\nmodel Semester {\n  id        String    @id @default(cuid())\n  semester  String    @unique\n  createdAt DateTime  @default(now()) // UTC\n  updatedAt DateTime  @updatedAt // UTC\n  userId    String\n  user      User      @relation(fields: [userId], references: [id])\n  subjects  Subject[]\n}\n\nmodel Subject {\n  id         String   @id @default(cuid())\n  name       String\n  createdAt  DateTime @default(now()) // UTC\n  updatedAt  DateTime @updatedAt // UTC\n  semesterId String\n  semester   Semester @relation(fields: [semesterId], references: [id])\n  grades     Grade[]\n}\n\nmodel Grade {\n  id        String   @id @default(cuid())\n  name      String\n  value     Int\n  createdAt DateTime @default(now()) // UTC\n  updatedAt DateTime @updatedAt // UTC\n  subjectId String\n  subject   Subject  @relation(fields: [subjectId], references: [id])\n}\n",
+  "inlineSchemaHash": "ea4f527248ddf146c18b9a96d2092f05fb8f78e5d386d2c69e278d51aa461f05",
   "copyEngine": true
 }
 
