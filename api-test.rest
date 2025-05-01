@@ -82,3 +82,14 @@ Authorization: {{devToken}}
     "semester": "2024/25lololol",
     "userId": "{{devUserId}}"
 }
+
+### DELETE /semesters (delete a semester) (protected)
+@semesterId = cma5ec8er0001ts69df72gec3
+DELETE http://localhost:3000/semesters/{{semesterId}}
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "userId": "{{devUserId}}"
+}
+
