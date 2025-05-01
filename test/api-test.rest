@@ -1,0 +1,211 @@
+### VARIABLES
+
+@devToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNtYTNwODRlaTAwMDB0c3MwYnZ2anRtYmgiLCJpYXQiOjE3NDYxMDQ4NDQsImV4cCI6MTc0NjE5MTI0NH0.FdmQgtHcFw_IBQirXbFC38dCvtsQsPLoJQl1uMwvrO4
+
+@devUserId = cma3p84ei0000tss0bvvjtmbh
+
+### GET /
+
+GET http://localhost:3000/
+
+### POST /register (register a new user)
+
+POST http://localhost:3000/auth/register 
+Content-Type: application/json
+
+{
+    "name": "New User",
+    "email": "testmail@gmail.com",
+    "username": "newuser",
+    "password": "newpassword"
+}
+
+### POST /login (login a user)
+
+POST http://localhost:3000/auth/login 
+Content-Type: application/json
+
+{
+    "email": "testmail@gmail.com",
+    "password": "newpassword"
+}
+
+### POST /login (login with username)
+
+POST http://localhost:3000/auth/login 
+Content-Type: application/json
+
+{
+    "username": "newuser",
+    "password": "newpassword"
+}
+
+### GET /semesters (get all semesters) (protected)
+
+GET http://localhost:3000/semesters 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "userId": "{{devUserId}}"
+}
+
+### GET /semesters (get a semester by id) (protected)
+
+@semesterId = cma5ecgn40003ts691d1lcup2
+
+GET http://localhost:3000/semesters/{{semesterId}}
+Content-Type: application/json
+Authorization: {{devToken}}
+
+
+### GET /semesters (get a year by semester string) (protected)
+
+GET http://localhost:3000/semesters/semester 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "userId": "{{devUserId}}",
+    "semester": "27"
+}
+
+### POST /semesters (create a new semester) (protected)
+
+POST http://localhost:3000/semesters 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "semester": "2027/28",
+    "userId": "{{devUserId}}"
+}
+
+### PUT /semesters (update a semester) (protected)
+
+@semesterId = cma5ec8er0001ts69df72gec3
+
+PUT http://localhost:3000/semesters/{{semesterId}} 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "semester": "2024/25lololol",
+    "userId": "{{devUserId}}"
+}
+
+### DELETE /semesters (delete a semester) (protected)
+
+@semesterId = cma5ec8er0001ts69df72gec3
+
+DELETE http://localhost:3000/semesters/{{semesterId}} 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "userId": "{{devUserId}}"
+}
+
+### GET /subjects (get all subjects) (protected)
+
+@semesterId = cma5ecgn40003ts691d1lcup2
+
+GET http://localhost:3000/subjects 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "semesterId": "{{semesterId}}"
+}
+
+### GET /subjects (get a subject by id) (protected)
+
+@subjectId = cma5hmbvw00015bfjfe4i6cwr
+
+# Shows subject with all grades
+GET http://localhost:3000/subjects/{{subjectId}} 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+### CREATE /subjects (create a new subject) (protected)
+
+@semesterId = cma5ecgn40003ts691d1lcup2
+
+POST http://localhost:3000/subjects 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "name": "AEuP",
+    "semesterId": "{{semesterId}}"
+}
+
+### UPDATE /subjects (update a subject) (protected)
+
+@subjectId = cma5ga0f60001ts70p57gbno0
+
+PUT http://localhost:3000/subjects/{{subjectId}} 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "name": "Updated Subject"
+}
+
+### DELETE /subjects (delete a subject) (protected)
+
+@subjectId = cma5gu9w500015bpplkzkvdif
+
+DELETE http://localhost:3000/subjects/{{subjectId}} 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+### GET /grades (get all grades for a subject) (protected)
+
+@subjectId = cma5hmbvw00015bfjfe4i6cwr
+
+GET http://localhost:3000/grades 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "subjectId": "{{subjectId}}"
+}
+
+### POST /grades (create a new grade) (protected)
+
+@subjectId = cma5hmbvw00015bfjfe4i6cwr
+
+@subjectName = AEuP
+
+POST http://localhost:3000/grades 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "subjectId": "{{subjectId}}",
+    "subjectName": "{{subjectName}}",
+    "grade": "2.0",
+    "type": "Schulaufgabe",
+    "date": "2025-01-05"
+}
+
+### PUT /grades (update a grade) (protected)
+
+@gradeId = cma5ie9zx00015b0kstc4ogp1
+
+PUT http://localhost:3000/grades/{{gradeId}} 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "type": "Updated Type",
+    "grade": "asdfasdf",
+    "date": "2025-01-05"
+}
+
+### DELETE /grades (delete a grade) (protected)
+
+DELETE http://localhost:3000/grades/{{gradeId}} 
+Content-Type: application/json
+Authorization: {{devToken}}

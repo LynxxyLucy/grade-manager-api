@@ -1,0 +1,67 @@
+### VARIABLES
+@devToken = {{$dotenv DEV_TOKEN}}
+@devUserId = {{$dotenv DEV_USER_ID}}
+
+### GET /semesters (get all semesters for a user) (protected)
+GET http://localhost:3000/semesters
+Content-Type: application/json
+Authorization: {{$devToken}}
+
+{
+    "userId": "{{$devUserId}}"
+}
+
+### GET /semesters (get a semester by id) (protected)
+
+@semesterId = cma5ecgn40003ts691d1lcup2
+
+GET http://localhost:3000/semesters/{{semesterId}}
+Content-Type: application/json
+Authorization: {{devToken}}
+
+### GET /semesters/semester (get a semester by string) (protected)
+
+GET http://localhost:3000/semesters/semester 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "userId": "{{devUserId}}",
+    "semester": "27"
+}
+
+### POST /semesters (create a new semester) (protected)
+
+POST http://localhost:3000/semesters 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "semester": "2027/28",
+    "userId": "{{devUserId}}"
+}
+
+### PUT /semesters (update a semester) (protected)
+
+@semesterId = cma5ec8er0001ts69df72gec3
+
+PUT http://localhost:3000/semesters/{{semesterId}} 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "semester": "2024/25lololol",
+    "userId": "{{devUserId}}"
+}
+
+### DELETE /semesters (delete a semester) (protected)
+
+@semesterId = cma5ec8er0001ts69df72gec3
+
+DELETE http://localhost:3000/semesters/{{semesterId}} 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "userId": "{{devUserId}}"
+}

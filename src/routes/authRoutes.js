@@ -113,4 +113,25 @@ router.post("/login", async (req, res) => {
   }
 });
 
+/*
+ * DELETE a user
+ */
+router.delete("/delete/:id", async (req, res) => {
+  const { id } = req.params; // Get userId from request parameters
+
+  try {
+    // Delete the user
+    await prisma.user.delete({
+      where: {
+        id,
+      },
+    });
+
+    res.sendStatus(204); // No Content
+  } catch (error) {
+    console.log(error.message);
+    return res.sendStatus(500); // Internal Server Error
+  }
+});
+
 export default router;

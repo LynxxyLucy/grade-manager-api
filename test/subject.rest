@@ -1,0 +1,52 @@
+### VARIABLES
+
+@devToken = {{$dotenv DEV_TOKEN}}
+
+@devUserId = {{$dotenv DEV_USER_ID}}
+
+@semesterId = cma5ecgn40003ts691d1lcup2
+
+@subjectId = cma5hmbvw00015bfjfe4i6cwr
+
+### GET /subjects (get all subjects) (protected)
+
+GET http://localhost:3000/subjects 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "semesterId": "{{semesterId}}"
+}
+
+### GET /subjects (get a subject by id) (protected)
+
+GET http://localhost:3000/subjects/{{subjectId}} 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+### CREATE /subjects (create a new subject) (protected)
+
+POST http://localhost:3000/subjects 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "name": "AEuP",
+    "semesterId": "{{semesterId}}"
+}
+
+### UPDATE /subjects (update a subject) (protected)
+
+PUT http://localhost:3000/subjects/{{subjectId}} 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "name": "Updated Subject"
+}
+
+### DELETE /subjects (delete a subject) (protected)
+
+DELETE http://localhost:3000/subjects/{{subjectId}} 
+Content-Type: application/json
+Authorization: {{devToken}}

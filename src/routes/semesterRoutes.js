@@ -1,6 +1,4 @@
 import express from "express";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import prisma from "../prismaClient.js";
 
 const router = express.Router();
@@ -17,6 +15,36 @@ router.get("/", async (req, res) => {
     });
 
     res.status(200).json(semesters); // Send the semesters in the response
+  } catch (error) {
+    console.log(error.message);
+    res.sendStatus(500).json({ message: error.message }); // Internal Server Error
+  }
+});
+
+// Get a specific semester by id
+router.get("/:id", async (req, res) => {
+  const { id } = req.params; // Get semesterId from request parameters
+
+  try {
+    const semester = await prisma.semester.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!semester) {
+      return res.status(404).json({ message: "Semester not found." }); // Not Found
+    }
+
+    const subjects = await prisma.subject.findMany({
+      where: {
+        semesterId: id,
+      },
+    });
+
+    semester.subjects = subjects; // Add subjects to the semester object
+
+    res.status(200).json(semester); // Send the semester in the response
   } catch (error) {
     console.log(error.message);
     res.sendStatus(500).json({ message: error.message }); // Internal Server Error
@@ -53,10 +81,6 @@ router.get("/semester", async (req, res) => {
         userId,
       },
     });
-
-    if (!getSemester) {
-      return res.status(404).json({ message: "Semester not found." }); // Not Found
-    }
 
     res.status(200).json(getSemester); // Send the semester in the response
   } catch (error) {
