@@ -5,14 +5,34 @@ const router = express.Router();
 
 // Get all semesters of a user
 router.get("/", async (req, res) => {
-  const { userId } = req.query; // Get userId from query parameters
+  const { userId } = req.body; // Get userId from query parameters
+  const { search } = req.query; // Get semester from query parameters
 
   try {
+    if (search) {
+      const semesters = await prisma.semester.findMany({
+        where: {
+          semester: { contains: search }, // Find semesters that contain the string
+          userId,
+        },
+      });
+
+      if (!semesters) {
+        return res.status(404).json({ message: "No semesters found." }); // Not Found
+      }
+
+      return res.status(200).json(semesters); // Send the semesters in the response
+    }
+
     const semesters = await prisma.semester.findMany({
       where: {
         userId,
       },
     });
+
+    if (!semesters) {
+      return res.status(404).json({ message: "No semesters found." }); // Not Found
+    }
 
     res.status(200).json(semesters); // Send the semesters in the response
   } catch (error) {
@@ -51,6 +71,25 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Get semesters by userId and semester name
+router.get("/semester", async (req, res) => {
+  const { userId } = req.body; // Get userId from query parameters
+  const { semester } = req.body; // Get semester from request body
+  try {
+    const getSemester = await prisma.semester.findMany({
+      where: {
+        semester: { contains: semester }, // Find semesters that contain the string
+        userId,
+      },
+    });
+
+    res.status(200).json(getSemester); // Send the semester in the response
+  } catch (error) {
+    console.log(error.message);
+    res.sendStatus(500).json({ message: error.message }); // Internal Server Error
+  }
+});
+
 // Create a new semester for a user
 router.post("/", async (req, res) => {
   const { userId, semester } = req.body; // Get userId and semester from request body
@@ -64,25 +103,6 @@ router.post("/", async (req, res) => {
     });
 
     res.status(201).json({ message: "Semester created.", newSemester }); // Send the new semester in the response
-  } catch (error) {
-    console.log(error.message);
-    res.sendStatus(500).json({ message: error.message }); // Internal Server Error
-  }
-});
-
-// Get a specific semester for a user
-router.get("/semester", async (req, res) => {
-  const { userId } = req.body; // Get userId from query parameters
-  const { semester } = req.body; // Get semester from request body
-  try {
-    const getSemester = await prisma.semester.findMany({
-      where: {
-        semester: { contains: semester }, // Find semesters that contain the string
-        userId,
-      },
-    });
-
-    res.status(200).json(getSemester); // Send the semester in the response
   } catch (error) {
     console.log(error.message);
     res.sendStatus(500).json({ message: error.message }); // Internal Server Error

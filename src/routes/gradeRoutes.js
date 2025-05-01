@@ -45,8 +45,7 @@ router.post("/", async (req, res) => {
 // Update a specific grade by id
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
-
-  console.log(id, grade, type, date);
+  const { grade, type, date } = req.body; // Get name and value from request body
 
   try {
     const updatedGrade = await prisma.grade.update({

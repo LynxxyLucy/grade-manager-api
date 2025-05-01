@@ -18,7 +18,7 @@ Authorization: {{devToken}}
     "semesterId": "{{semesterId}}"
 }
 
-### GET /subjects (get a subject by id) (protected)
+### GET /subjects/:id (get a subject by id) (protected)
 
 GET http://localhost:3000/subjects/{{subjectId}} 
 Content-Type: application/json
@@ -35,9 +35,9 @@ Authorization: {{devToken}}
     "semesterId": "{{semesterId}}"
 }
 
-### UPDATE /subjects (update a subject) (protected)
+### UPDATE /subjects/:id (update a subject) (protected)
 
-PUT http://localhost:3000/subjects/{{subjectId}} 
+PUT http://localhost:3000/subjects/{{subjectId}}
 Content-Type: application/json
 Authorization: {{devToken}}
 
@@ -45,7 +45,7 @@ Authorization: {{devToken}}
     "name": "Updated Subject"
 }
 
-### DELETE /subjects (delete a subject) (protected)
+### DELETE /subjects/:id (delete a subject) (protected)
 
 DELETE http://localhost:3000/subjects/{{subjectId}} 
 Content-Type: application/json

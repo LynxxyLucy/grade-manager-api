@@ -1,34 +1,40 @@
-### VARIABLES
+### ENVIRONMENT VARIABLES
+
 @devToken = {{$dotenv DEV_TOKEN}}
+
 @devUserId = {{$dotenv DEV_USER_ID}}
 
-### GET /semesters (get all semesters for a user) (protected)
-GET http://localhost:3000/semesters
-Content-Type: application/json
-Authorization: {{$devToken}}
-
-{
-    "userId": "{{$devUserId}}"
-}
-
-### GET /semesters (get a semester by id) (protected)
+### FILE VARIABLEs
 
 @semesterId = cma5ecgn40003ts691d1lcup2
 
-GET http://localhost:3000/semesters/{{semesterId}}
-Content-Type: application/json
-Authorization: {{devToken}}
+### GET /semesters (get all semesters for a user) (protected)
 
-### GET /semesters/semester (get a semester by string) (protected)
-
-GET http://localhost:3000/semesters/semester 
+GET http://localhost:3000/semesters
 Content-Type: application/json
 Authorization: {{devToken}}
 
 {
-    "userId": "{{devUserId}}",
-    "semester": "27"
+    "userId": "{{devUserId}}"
 }
+
+### GET /semesters?search="" (get a semester by string) (protected)
+
+@searchString = 27
+
+GET http://localhost:3000/semesters?search={{searchString}} 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "userId": "{{devUserId}}"
+}
+
+### GET /semesters/:id (get a semester by id) (protected)
+
+GET http://localhost:3000/semesters/{{semesterId}} 
+Content-Type: application/json
+Authorization: {{devToken}}
 
 ### POST /semesters (create a new semester) (protected)
 
@@ -37,13 +43,11 @@ Content-Type: application/json
 Authorization: {{devToken}}
 
 {
-    "semester": "2027/28",
+    "semester": "asdfasdf",
     "userId": "{{devUserId}}"
 }
 
-### PUT /semesters (update a semester) (protected)
-
-@semesterId = cma5ec8er0001ts69df72gec3
+### PUT /semesters/:id (update a semester) (protected)
 
 PUT http://localhost:3000/semesters/{{semesterId}} 
 Content-Type: application/json
@@ -54,9 +58,7 @@ Authorization: {{devToken}}
     "userId": "{{devUserId}}"
 }
 
-### DELETE /semesters (delete a semester) (protected)
-
-@semesterId = cma5ec8er0001ts69df72gec3
+### DELETE /semesters/:id (delete a semester) (protected)
 
 DELETE http://localhost:3000/semesters/{{semesterId}} 
 Content-Type: application/json

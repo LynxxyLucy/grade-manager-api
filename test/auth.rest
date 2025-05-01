@@ -17,8 +17,8 @@ Content-Type: application/json
 
 {
     "name": "wegwerf",
-    "email": "dddd@gmail.com",
-    "username": "asss",
+    "email": "testmail@gmail.com",
+    "username": "newuser",
     "password": "newpassword"
 }
 
@@ -38,7 +38,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "username": "asss",
+    "username": "newuser",
     "password": "newpassword"
 }
 
