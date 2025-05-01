@@ -12,19 +12,19 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String     @id @default(cuid())
   name      String
-  email     String   @unique
-  username  String   @unique
+  email     String     @unique
+  username  String     @unique
   password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  years     Year[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  semesters Semester[]
 }
 
-model Year {
+model Semester {
   id        String    @id @default(cuid())
-  year      String
+  semester  String    @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   userId    String
@@ -33,13 +33,13 @@ model Year {
 }
 
 model Subject {
-  id        String   @id @default(cuid())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  yearId    String
-  Year      Year     @relation(fields: [yearId], references: [id])
-  grades    Grade[]
+  id         String   @id @default(cuid())
+  name       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  semesterId String
+  semester   Semester @relation(fields: [semesterId], references: [id])
+  grades     Grade[]
 }
 
 model Grade {

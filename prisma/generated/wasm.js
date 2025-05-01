@@ -127,9 +127,9 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.YearScalarFieldEnum = {
+exports.Prisma.SemesterScalarFieldEnum = {
   id: 'id',
-  year: 'year',
+  semester: 'semester',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId'
@@ -140,7 +140,7 @@ exports.Prisma.SubjectScalarFieldEnum = {
   name: 'name',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  yearId: 'yearId'
+  semesterId: 'semesterId'
 };
 
 exports.Prisma.GradeScalarFieldEnum = {
@@ -160,7 +160,7 @@ exports.Prisma.SortOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Year: 'Year',
+  Semester: 'Semester',
   Subject: 'Subject',
   Grade: 'Grade'
 };

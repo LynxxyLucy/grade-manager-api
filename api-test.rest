@@ -40,9 +40,9 @@ Content-Type: application/json
     "password": "newpassword"
 }
 
-### GET /years (get all years) (protected)
+### GET /semesters (get all semesters) (protected)
 
-GET http://localhost:3000/years 
+GET http://localhost:3000/semesters 
 Content-Type: application/json
 Authorization: {{devToken}}
 
@@ -50,24 +50,24 @@ Authorization: {{devToken}}
     "userId": "{{devUserId}}"
 }
 
-### GET /years (get a year by year identifier) (protected)
+### GET /semesters (get a year by semester string) (protected)
 
-GET http://localhost:3000/years/year
+GET http://localhost:3000/semesters/semester
 Content-Type: application/json
 Authorization: {{devToken}}
 
 {
     "userId": "{{devUserId}}",
-    "year": "25"
+    "semester": "24"
 }
 
-### POST /years (create a new year) (protected)
+### POST /semesters (create a new semester) (protected)
 
-POST http://localhost:3000/years 
+POST http://localhost:3000/semesters 
 Content-Type: application/json
 Authorization: {{devToken}}
 
 {
-    "year": "2026/27",
+    "semester": "2026/27",
     "userId": "{{devUserId}}"
 }
