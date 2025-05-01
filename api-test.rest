@@ -71,3 +71,14 @@ Authorization: {{devToken}}
     "semester": "2026/27",
     "userId": "{{devUserId}}"
 }
+
+### PUT /semesters (update a semester) (protected)
+@semesterId = cma5ec8er0001ts69df72gec3
+PUT http://localhost:3000/semesters/{{semesterId}}
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "semester": "2024/25lololol",
+    "userId": "{{devUserId}}"
+}

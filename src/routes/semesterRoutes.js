@@ -45,12 +45,11 @@ router.post("/", async (req, res) => {
 // Get a specific semester for a user
 router.get("/semester", async (req, res) => {
   const { userId } = req.body; // Get userId from query parameters
-  console.log(req.body.semester);
-
+  const { semester } = req.body; // Get semester from request body
   try {
     const getSemester = await prisma.semester.findMany({
       where: {
-        semester: { contains: req.body.semester }, // Find semesters that contain the string
+        semester: { contains: semester }, // Find semesters that contain the string
         userId,
       },
     });
