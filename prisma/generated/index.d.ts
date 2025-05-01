@@ -4506,24 +4506,15 @@ export namespace Prisma {
 
   export type AggregateGrade = {
     _count: GradeCountAggregateOutputType | null
-    _avg: GradeAvgAggregateOutputType | null
-    _sum: GradeSumAggregateOutputType | null
     _min: GradeMinAggregateOutputType | null
     _max: GradeMaxAggregateOutputType | null
   }
 
-  export type GradeAvgAggregateOutputType = {
-    value: number | null
-  }
-
-  export type GradeSumAggregateOutputType = {
-    value: number | null
-  }
-
   export type GradeMinAggregateOutputType = {
     id: string | null
-    name: string | null
-    value: number | null
+    type: string | null
+    grade: string | null
+    date: string | null
     createdAt: Date | null
     updatedAt: Date | null
     subjectId: string | null
@@ -4531,8 +4522,9 @@ export namespace Prisma {
 
   export type GradeMaxAggregateOutputType = {
     id: string | null
-    name: string | null
-    value: number | null
+    type: string | null
+    grade: string | null
+    date: string | null
     createdAt: Date | null
     updatedAt: Date | null
     subjectId: string | null
@@ -4540,8 +4532,9 @@ export namespace Prisma {
 
   export type GradeCountAggregateOutputType = {
     id: number
-    name: number
-    value: number
+    type: number
+    grade: number
+    date: number
     createdAt: number
     updatedAt: number
     subjectId: number
@@ -4549,18 +4542,11 @@ export namespace Prisma {
   }
 
 
-  export type GradeAvgAggregateInputType = {
-    value?: true
-  }
-
-  export type GradeSumAggregateInputType = {
-    value?: true
-  }
-
   export type GradeMinAggregateInputType = {
     id?: true
-    name?: true
-    value?: true
+    type?: true
+    grade?: true
+    date?: true
     createdAt?: true
     updatedAt?: true
     subjectId?: true
@@ -4568,8 +4554,9 @@ export namespace Prisma {
 
   export type GradeMaxAggregateInputType = {
     id?: true
-    name?: true
-    value?: true
+    type?: true
+    grade?: true
+    date?: true
     createdAt?: true
     updatedAt?: true
     subjectId?: true
@@ -4577,8 +4564,9 @@ export namespace Prisma {
 
   export type GradeCountAggregateInputType = {
     id?: true
-    name?: true
-    value?: true
+    type?: true
+    grade?: true
+    date?: true
     createdAt?: true
     updatedAt?: true
     subjectId?: true
@@ -4623,18 +4611,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: GradeAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: GradeSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: GradeMinAggregateInputType
@@ -4665,22 +4641,19 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: GradeCountAggregateInputType | true
-    _avg?: GradeAvgAggregateInputType
-    _sum?: GradeSumAggregateInputType
     _min?: GradeMinAggregateInputType
     _max?: GradeMaxAggregateInputType
   }
 
   export type GradeGroupByOutputType = {
     id: string
-    name: string
-    value: number
+    type: string
+    grade: string
+    date: string
     createdAt: Date
     updatedAt: Date
     subjectId: string
     _count: GradeCountAggregateOutputType | null
-    _avg: GradeAvgAggregateOutputType | null
-    _sum: GradeSumAggregateOutputType | null
     _min: GradeMinAggregateOutputType | null
     _max: GradeMaxAggregateOutputType | null
   }
@@ -4701,8 +4674,9 @@ export namespace Prisma {
 
   export type GradeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
-    value?: boolean
+    type?: boolean
+    grade?: boolean
+    date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     subjectId?: boolean
@@ -4711,8 +4685,9 @@ export namespace Prisma {
 
   export type GradeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
-    value?: boolean
+    type?: boolean
+    grade?: boolean
+    date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     subjectId?: boolean
@@ -4721,8 +4696,9 @@ export namespace Prisma {
 
   export type GradeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
-    value?: boolean
+    type?: boolean
+    grade?: boolean
+    date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     subjectId?: boolean
@@ -4731,14 +4707,15 @@ export namespace Prisma {
 
   export type GradeSelectScalar = {
     id?: boolean
-    name?: boolean
-    value?: boolean
+    type?: boolean
+    grade?: boolean
+    date?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     subjectId?: boolean
   }
 
-  export type GradeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "value" | "createdAt" | "updatedAt" | "subjectId", ExtArgs["result"]["grade"]>
+  export type GradeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "grade" | "date" | "createdAt" | "updatedAt" | "subjectId", ExtArgs["result"]["grade"]>
   export type GradeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     subject?: boolean | SubjectDefaultArgs<ExtArgs>
   }
@@ -4756,8 +4733,9 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      name: string
-      value: number
+      type: string
+      grade: string
+      date: string
       createdAt: Date
       updatedAt: Date
       subjectId: string
@@ -5186,8 +5164,9 @@ export namespace Prisma {
    */
   interface GradeFieldRefs {
     readonly id: FieldRef<"Grade", 'String'>
-    readonly name: FieldRef<"Grade", 'String'>
-    readonly value: FieldRef<"Grade", 'Int'>
+    readonly type: FieldRef<"Grade", 'String'>
+    readonly grade: FieldRef<"Grade", 'String'>
+    readonly date: FieldRef<"Grade", 'String'>
     readonly createdAt: FieldRef<"Grade", 'DateTime'>
     readonly updatedAt: FieldRef<"Grade", 'DateTime'>
     readonly subjectId: FieldRef<"Grade", 'String'>
@@ -5651,8 +5630,9 @@ export namespace Prisma {
 
   export const GradeScalarFieldEnum: {
     id: 'id',
-    name: 'name',
-    value: 'value',
+    type: 'type',
+    grade: 'grade',
+    date: 'date',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     subjectId: 'subjectId'
@@ -5692,13 +5672,6 @@ export namespace Prisma {
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
   /**
    * Deep Input Types
@@ -5891,8 +5864,9 @@ export namespace Prisma {
     OR?: GradeWhereInput[]
     NOT?: GradeWhereInput | GradeWhereInput[]
     id?: StringFilter<"Grade"> | string
-    name?: StringFilter<"Grade"> | string
-    value?: IntFilter<"Grade"> | number
+    type?: StringFilter<"Grade"> | string
+    grade?: StringFilter<"Grade"> | string
+    date?: StringFilter<"Grade"> | string
     createdAt?: DateTimeFilter<"Grade"> | Date | string
     updatedAt?: DateTimeFilter<"Grade"> | Date | string
     subjectId?: StringFilter<"Grade"> | string
@@ -5901,8 +5875,9 @@ export namespace Prisma {
 
   export type GradeOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrder
-    value?: SortOrder
+    type?: SortOrder
+    grade?: SortOrder
+    date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     subjectId?: SortOrder
@@ -5914,8 +5889,9 @@ export namespace Prisma {
     AND?: GradeWhereInput | GradeWhereInput[]
     OR?: GradeWhereInput[]
     NOT?: GradeWhereInput | GradeWhereInput[]
-    name?: StringFilter<"Grade"> | string
-    value?: IntFilter<"Grade"> | number
+    type?: StringFilter<"Grade"> | string
+    grade?: StringFilter<"Grade"> | string
+    date?: StringFilter<"Grade"> | string
     createdAt?: DateTimeFilter<"Grade"> | Date | string
     updatedAt?: DateTimeFilter<"Grade"> | Date | string
     subjectId?: StringFilter<"Grade"> | string
@@ -5924,16 +5900,15 @@ export namespace Prisma {
 
   export type GradeOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrder
-    value?: SortOrder
+    type?: SortOrder
+    grade?: SortOrder
+    date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     subjectId?: SortOrder
     _count?: GradeCountOrderByAggregateInput
-    _avg?: GradeAvgOrderByAggregateInput
     _max?: GradeMaxOrderByAggregateInput
     _min?: GradeMinOrderByAggregateInput
-    _sum?: GradeSumOrderByAggregateInput
   }
 
   export type GradeScalarWhereWithAggregatesInput = {
@@ -5941,8 +5916,9 @@ export namespace Prisma {
     OR?: GradeScalarWhereWithAggregatesInput[]
     NOT?: GradeScalarWhereWithAggregatesInput | GradeScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Grade"> | string
-    name?: StringWithAggregatesFilter<"Grade"> | string
-    value?: IntWithAggregatesFilter<"Grade"> | number
+    type?: StringWithAggregatesFilter<"Grade"> | string
+    grade?: StringWithAggregatesFilter<"Grade"> | string
+    date?: StringWithAggregatesFilter<"Grade"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Grade"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Grade"> | Date | string
     subjectId?: StringWithAggregatesFilter<"Grade"> | string
@@ -6142,8 +6118,9 @@ export namespace Prisma {
 
   export type GradeCreateInput = {
     id?: string
-    name: string
-    value: number
+    type: string
+    grade: string
+    date: string
     createdAt?: Date | string
     updatedAt?: Date | string
     subject: SubjectCreateNestedOneWithoutGradesInput
@@ -6151,8 +6128,9 @@ export namespace Prisma {
 
   export type GradeUncheckedCreateInput = {
     id?: string
-    name: string
-    value: number
+    type: string
+    grade: string
+    date: string
     createdAt?: Date | string
     updatedAt?: Date | string
     subjectId: string
@@ -6160,8 +6138,9 @@ export namespace Prisma {
 
   export type GradeUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    grade?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subject?: SubjectUpdateOneRequiredWithoutGradesNestedInput
@@ -6169,8 +6148,9 @@ export namespace Prisma {
 
   export type GradeUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    grade?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subjectId?: StringFieldUpdateOperationsInput | string
@@ -6178,8 +6158,9 @@ export namespace Prisma {
 
   export type GradeCreateManyInput = {
     id?: string
-    name: string
-    value: number
+    type: string
+    grade: string
+    date: string
     createdAt?: Date | string
     updatedAt?: Date | string
     subjectId: string
@@ -6187,16 +6168,18 @@ export namespace Prisma {
 
   export type GradeUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    grade?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GradeUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    grade?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subjectId?: StringFieldUpdateOperationsInput | string
@@ -6376,17 +6359,6 @@ export namespace Prisma {
     semesterId?: SortOrder
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type SubjectScalarRelationFilter = {
     is?: SubjectWhereInput
     isNot?: SubjectWhereInput
@@ -6394,21 +6366,19 @@ export namespace Prisma {
 
   export type GradeCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    value?: SortOrder
+    type?: SortOrder
+    grade?: SortOrder
+    date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     subjectId?: SortOrder
   }
 
-  export type GradeAvgOrderByAggregateInput = {
-    value?: SortOrder
-  }
-
   export type GradeMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    value?: SortOrder
+    type?: SortOrder
+    grade?: SortOrder
+    date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     subjectId?: SortOrder
@@ -6416,31 +6386,12 @@ export namespace Prisma {
 
   export type GradeMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    value?: SortOrder
+    type?: SortOrder
+    grade?: SortOrder
+    date?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     subjectId?: SortOrder
-  }
-
-  export type GradeSumOrderByAggregateInput = {
-    value?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type SemesterCreateNestedManyWithoutUserInput = {
@@ -6611,14 +6562,6 @@ export namespace Prisma {
     connect?: SubjectWhereUniqueInput
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type SubjectUpdateOneRequiredWithoutGradesNestedInput = {
     create?: XOR<SubjectCreateWithoutGradesInput, SubjectUncheckedCreateWithoutGradesInput>
     connectOrCreate?: SubjectCreateOrConnectWithoutGradesInput
@@ -6692,33 +6635,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type SemesterCreateWithoutUserInput = {
@@ -6904,16 +6820,18 @@ export namespace Prisma {
 
   export type GradeCreateWithoutSubjectInput = {
     id?: string
-    name: string
-    value: number
+    type: string
+    grade: string
+    date: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type GradeUncheckedCreateWithoutSubjectInput = {
     id?: string
-    name: string
-    value: number
+    type: string
+    grade: string
+    date: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -6975,8 +6893,9 @@ export namespace Prisma {
     OR?: GradeScalarWhereInput[]
     NOT?: GradeScalarWhereInput | GradeScalarWhereInput[]
     id?: StringFilter<"Grade"> | string
-    name?: StringFilter<"Grade"> | string
-    value?: IntFilter<"Grade"> | number
+    type?: StringFilter<"Grade"> | string
+    grade?: StringFilter<"Grade"> | string
+    date?: StringFilter<"Grade"> | string
     createdAt?: DateTimeFilter<"Grade"> | Date | string
     updatedAt?: DateTimeFilter<"Grade"> | Date | string
     subjectId?: StringFilter<"Grade"> | string
@@ -7092,32 +7011,36 @@ export namespace Prisma {
 
   export type GradeCreateManySubjectInput = {
     id?: string
-    name: string
-    value: number
+    type: string
+    grade: string
+    date: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type GradeUpdateWithoutSubjectInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    grade?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GradeUncheckedUpdateWithoutSubjectInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    grade?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GradeUncheckedUpdateManyWithoutSubjectInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
+    grade?: StringFieldUpdateOperationsInput | string
+    date?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

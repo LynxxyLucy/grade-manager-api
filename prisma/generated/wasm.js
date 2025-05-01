@@ -145,8 +145,9 @@ exports.Prisma.SubjectScalarFieldEnum = {
 
 exports.Prisma.GradeScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  value: 'value',
+  type: 'type',
+  grade: 'grade',
+  date: 'date',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   subjectId: 'subjectId'

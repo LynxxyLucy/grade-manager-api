@@ -43,12 +43,12 @@ model Subject {
 }
 
 model Grade {
-  id          String   @id @default(cuid())
-  type        String // e.g. "Exam", "Assignment", "Project", etc.
-  grade       String // e.g. "A", "B", "C" or "1", "2", "3",...
-  date        String // e.g. "2023-10-01"
-  createdAt   DateTime @default(now()) // UTC
-  updatedAt   DateTime @updatedAt // UTC
-  subjectId   String
-  subject     Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  id        String   @id @default(cuid())
+  type      String // e.g. "Exam", "Assignment", "Project", etc.
+  grade     String // e.g. "A", "B", "C" or "1", "2", "3",...
+  date      String // e.g. "2023-10-01"
+  createdAt DateTime @default(now()) // UTC
+  updatedAt DateTime @updatedAt // UTC
+  subjectId String
+  subject   Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
 }
