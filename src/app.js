@@ -3,7 +3,7 @@ import path, { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import authMiddleware from "./middleware/authMiddleware.js";
 import authRoutes from "./routes/authRoutes.js"; // Import auth routes
-import yearRoutes from "./routes/yearRoutes.js"; // Import year routes
+import semesterRoutes from "./routes/semesterRoutes.js"; // Import year routes
 import subjectRoutes from "./routes/subjectRoutes.js"; // Import subject routes
 import gradeRoutes from "./routes/gradeRoutes.js"; // Import grade routes
 
@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
  * API
  */
 app.use("/auth", authRoutes);
-app.use("/years", authMiddleware, yearRoutes);
+app.use("/semesters", authMiddleware, semesterRoutes);
 app.use("/subjects", authMiddleware, subjectRoutes);
 app.use("/grades", authMiddleware, gradeRoutes);
 
