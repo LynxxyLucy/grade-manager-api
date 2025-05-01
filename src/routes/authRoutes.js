@@ -14,16 +14,23 @@ router.post("/register", async (req, res) => {
 
   try {
     // Check if the user already exists
-    const existingUser = async () => {
-      await prisma.user.findUnique({
-        where: {
-          OR: [{ email: email }, { username: username }],
-        },
-      });
-    };
+    //const identifier = email ? { email } : { username }; // Use email or username to find the user
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+    if (user) {
+      return res.status(400).json({ message: "Username already exists." }); // Bad Request
+    }
 
-    if (existingUser) {
-      return res.status(400).json({ message: "User already exists" }); // Bad Request
+    const emailAdress = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+    if (emailAdress) {
+      return res.status(400).json({ message: "Email already registered." }); // Bad Request
     }
 
     // Hash the password
@@ -48,13 +55,14 @@ router.post("/register", async (req, res) => {
     res.status(201).json({
       token,
       user: {
-        username: newUser.username,
+        id: newUser.id,
+        name: newUser.name,
         email: newUser.email,
         username: newUser.username,
       },
     });
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
     res.sendStatus(500); // Internal Server Error
   }
 });
@@ -94,6 +102,7 @@ router.post("/login", async (req, res) => {
     res.status(200).json({
       token,
       user: {
+        id: user.id,
         username: user.username,
         email: user.email,
       },

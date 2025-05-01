@@ -2340,7 +2340,7 @@ export namespace Prisma {
 
   export type YearMinAggregateOutputType = {
     id: string | null
-    name: string | null
+    year: string | null
     createdAt: Date | null
     updatedAt: Date | null
     userId: string | null
@@ -2348,7 +2348,7 @@ export namespace Prisma {
 
   export type YearMaxAggregateOutputType = {
     id: string | null
-    name: string | null
+    year: string | null
     createdAt: Date | null
     updatedAt: Date | null
     userId: string | null
@@ -2356,7 +2356,7 @@ export namespace Prisma {
 
   export type YearCountAggregateOutputType = {
     id: number
-    name: number
+    year: number
     createdAt: number
     updatedAt: number
     userId: number
@@ -2366,7 +2366,7 @@ export namespace Prisma {
 
   export type YearMinAggregateInputType = {
     id?: true
-    name?: true
+    year?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -2374,7 +2374,7 @@ export namespace Prisma {
 
   export type YearMaxAggregateInputType = {
     id?: true
-    name?: true
+    year?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -2382,7 +2382,7 @@ export namespace Prisma {
 
   export type YearCountAggregateInputType = {
     id?: true
-    name?: true
+    year?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -2463,7 +2463,7 @@ export namespace Prisma {
 
   export type YearGroupByOutputType = {
     id: string
-    name: string
+    year: string
     createdAt: Date
     updatedAt: Date
     userId: string
@@ -2488,7 +2488,7 @@ export namespace Prisma {
 
   export type YearSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    year?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -2499,7 +2499,7 @@ export namespace Prisma {
 
   export type YearSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    year?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -2508,7 +2508,7 @@ export namespace Prisma {
 
   export type YearSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    year?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -2517,13 +2517,13 @@ export namespace Prisma {
 
   export type YearSelectScalar = {
     id?: boolean
-    name?: boolean
+    year?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
   }
 
-  export type YearOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["year"]>
+  export type YearOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "year" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["year"]>
   export type YearInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     subjects?: boolean | Year$subjectsArgs<ExtArgs>
@@ -2544,7 +2544,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      name: string
+      year: string
       createdAt: Date
       updatedAt: Date
       userId: string
@@ -2974,7 +2974,7 @@ export namespace Prisma {
    */
   interface YearFieldRefs {
     readonly id: FieldRef<"Year", 'String'>
-    readonly name: FieldRef<"Year", 'String'>
+    readonly year: FieldRef<"Year", 'String'>
     readonly createdAt: FieldRef<"Year", 'DateTime'>
     readonly updatedAt: FieldRef<"Year", 'DateTime'>
     readonly userId: FieldRef<"Year", 'String'>
@@ -3429,7 +3429,6 @@ export namespace Prisma {
     name: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    userId: string | null
     yearId: string | null
   }
 
@@ -3438,7 +3437,6 @@ export namespace Prisma {
     name: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    userId: string | null
     yearId: string | null
   }
 
@@ -3447,7 +3445,6 @@ export namespace Prisma {
     name: number
     createdAt: number
     updatedAt: number
-    userId: number
     yearId: number
     _all: number
   }
@@ -3458,7 +3455,6 @@ export namespace Prisma {
     name?: true
     createdAt?: true
     updatedAt?: true
-    userId?: true
     yearId?: true
   }
 
@@ -3467,7 +3463,6 @@ export namespace Prisma {
     name?: true
     createdAt?: true
     updatedAt?: true
-    userId?: true
     yearId?: true
   }
 
@@ -3476,7 +3471,6 @@ export namespace Prisma {
     name?: true
     createdAt?: true
     updatedAt?: true
-    userId?: true
     yearId?: true
     _all?: true
   }
@@ -3558,7 +3552,6 @@ export namespace Prisma {
     name: string
     createdAt: Date
     updatedAt: Date
-    userId: string
     yearId: string
     _count: SubjectCountAggregateOutputType | null
     _min: SubjectMinAggregateOutputType | null
@@ -3584,7 +3577,6 @@ export namespace Prisma {
     name?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    userId?: boolean
     yearId?: boolean
     Year?: boolean | YearDefaultArgs<ExtArgs>
     grades?: boolean | Subject$gradesArgs<ExtArgs>
@@ -3596,7 +3588,6 @@ export namespace Prisma {
     name?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    userId?: boolean
     yearId?: boolean
     Year?: boolean | YearDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subject"]>
@@ -3606,7 +3597,6 @@ export namespace Prisma {
     name?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    userId?: boolean
     yearId?: boolean
     Year?: boolean | YearDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subject"]>
@@ -3616,11 +3606,10 @@ export namespace Prisma {
     name?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    userId?: boolean
     yearId?: boolean
   }
 
-  export type SubjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "userId" | "yearId", ExtArgs["result"]["subject"]>
+  export type SubjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "yearId", ExtArgs["result"]["subject"]>
   export type SubjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Year?: boolean | YearDefaultArgs<ExtArgs>
     grades?: boolean | Subject$gradesArgs<ExtArgs>
@@ -3644,7 +3633,6 @@ export namespace Prisma {
       name: string
       createdAt: Date
       updatedAt: Date
-      userId: string
       yearId: string
     }, ExtArgs["result"]["subject"]>
     composites: {}
@@ -4075,7 +4063,6 @@ export namespace Prisma {
     readonly name: FieldRef<"Subject", 'String'>
     readonly createdAt: FieldRef<"Subject", 'DateTime'>
     readonly updatedAt: FieldRef<"Subject", 'DateTime'>
-    readonly userId: FieldRef<"Subject", 'String'>
     readonly yearId: FieldRef<"Subject", 'String'>
   }
     
@@ -5642,7 +5629,7 @@ export namespace Prisma {
 
   export const YearScalarFieldEnum: {
     id: 'id',
-    name: 'name',
+    year: 'year',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     userId: 'userId'
@@ -5656,7 +5643,6 @@ export namespace Prisma {
     name: 'name',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    userId: 'userId',
     yearId: 'yearId'
   };
 
@@ -5789,7 +5775,7 @@ export namespace Prisma {
     OR?: YearWhereInput[]
     NOT?: YearWhereInput | YearWhereInput[]
     id?: StringFilter<"Year"> | string
-    name?: StringFilter<"Year"> | string
+    year?: StringFilter<"Year"> | string
     createdAt?: DateTimeFilter<"Year"> | Date | string
     updatedAt?: DateTimeFilter<"Year"> | Date | string
     userId?: StringFilter<"Year"> | string
@@ -5799,7 +5785,7 @@ export namespace Prisma {
 
   export type YearOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrder
+    year?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -5812,7 +5798,7 @@ export namespace Prisma {
     AND?: YearWhereInput | YearWhereInput[]
     OR?: YearWhereInput[]
     NOT?: YearWhereInput | YearWhereInput[]
-    name?: StringFilter<"Year"> | string
+    year?: StringFilter<"Year"> | string
     createdAt?: DateTimeFilter<"Year"> | Date | string
     updatedAt?: DateTimeFilter<"Year"> | Date | string
     userId?: StringFilter<"Year"> | string
@@ -5822,7 +5808,7 @@ export namespace Prisma {
 
   export type YearOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrder
+    year?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -5836,7 +5822,7 @@ export namespace Prisma {
     OR?: YearScalarWhereWithAggregatesInput[]
     NOT?: YearScalarWhereWithAggregatesInput | YearScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Year"> | string
-    name?: StringWithAggregatesFilter<"Year"> | string
+    year?: StringWithAggregatesFilter<"Year"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Year"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Year"> | Date | string
     userId?: StringWithAggregatesFilter<"Year"> | string
@@ -5850,7 +5836,6 @@ export namespace Prisma {
     name?: StringFilter<"Subject"> | string
     createdAt?: DateTimeFilter<"Subject"> | Date | string
     updatedAt?: DateTimeFilter<"Subject"> | Date | string
-    userId?: StringFilter<"Subject"> | string
     yearId?: StringFilter<"Subject"> | string
     Year?: XOR<YearScalarRelationFilter, YearWhereInput>
     grades?: GradeListRelationFilter
@@ -5861,7 +5846,6 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    userId?: SortOrder
     yearId?: SortOrder
     Year?: YearOrderByWithRelationInput
     grades?: GradeOrderByRelationAggregateInput
@@ -5875,7 +5859,6 @@ export namespace Prisma {
     name?: StringFilter<"Subject"> | string
     createdAt?: DateTimeFilter<"Subject"> | Date | string
     updatedAt?: DateTimeFilter<"Subject"> | Date | string
-    userId?: StringFilter<"Subject"> | string
     yearId?: StringFilter<"Subject"> | string
     Year?: XOR<YearScalarRelationFilter, YearWhereInput>
     grades?: GradeListRelationFilter
@@ -5886,7 +5869,6 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    userId?: SortOrder
     yearId?: SortOrder
     _count?: SubjectCountOrderByAggregateInput
     _max?: SubjectMaxOrderByAggregateInput
@@ -5901,7 +5883,6 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Subject"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Subject"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Subject"> | Date | string
-    userId?: StringWithAggregatesFilter<"Subject"> | string
     yearId?: StringWithAggregatesFilter<"Subject"> | string
   }
 
@@ -6043,7 +6024,7 @@ export namespace Prisma {
 
   export type YearCreateInput = {
     id?: string
-    name: string
+    year: string
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutYearsInput
@@ -6052,7 +6033,7 @@ export namespace Prisma {
 
   export type YearUncheckedCreateInput = {
     id?: string
-    name: string
+    year: string
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: string
@@ -6061,7 +6042,7 @@ export namespace Prisma {
 
   export type YearUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutYearsNestedInput
@@ -6070,7 +6051,7 @@ export namespace Prisma {
 
   export type YearUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
@@ -6079,7 +6060,7 @@ export namespace Prisma {
 
   export type YearCreateManyInput = {
     id?: string
-    name: string
+    year: string
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: string
@@ -6087,14 +6068,14 @@ export namespace Prisma {
 
   export type YearUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type YearUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
@@ -6105,7 +6086,6 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    userId: string
     Year: YearCreateNestedOneWithoutSubjectsInput
     grades?: GradeCreateNestedManyWithoutSubjectInput
   }
@@ -6115,7 +6095,6 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    userId: string
     yearId: string
     grades?: GradeUncheckedCreateNestedManyWithoutSubjectInput
   }
@@ -6125,7 +6104,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
     Year?: YearUpdateOneRequiredWithoutSubjectsNestedInput
     grades?: GradeUpdateManyWithoutSubjectNestedInput
   }
@@ -6135,7 +6113,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
     yearId?: StringFieldUpdateOperationsInput | string
     grades?: GradeUncheckedUpdateManyWithoutSubjectNestedInput
   }
@@ -6145,7 +6122,6 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    userId: string
     yearId: string
   }
 
@@ -6154,7 +6130,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type SubjectUncheckedUpdateManyInput = {
@@ -6162,7 +6137,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
     yearId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -6341,7 +6315,7 @@ export namespace Prisma {
 
   export type YearCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    year?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -6349,7 +6323,7 @@ export namespace Prisma {
 
   export type YearMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    year?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -6357,7 +6331,7 @@ export namespace Prisma {
 
   export type YearMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    year?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -6383,7 +6357,6 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    userId?: SortOrder
     yearId?: SortOrder
   }
 
@@ -6392,7 +6365,6 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    userId?: SortOrder
     yearId?: SortOrder
   }
 
@@ -6401,7 +6373,6 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    userId?: SortOrder
     yearId?: SortOrder
   }
 
@@ -6752,7 +6723,7 @@ export namespace Prisma {
 
   export type YearCreateWithoutUserInput = {
     id?: string
-    name: string
+    year: string
     createdAt?: Date | string
     updatedAt?: Date | string
     subjects?: SubjectCreateNestedManyWithoutYearInput
@@ -6760,7 +6731,7 @@ export namespace Prisma {
 
   export type YearUncheckedCreateWithoutUserInput = {
     id?: string
-    name: string
+    year: string
     createdAt?: Date | string
     updatedAt?: Date | string
     subjects?: SubjectUncheckedCreateNestedManyWithoutYearInput
@@ -6796,7 +6767,7 @@ export namespace Prisma {
     OR?: YearScalarWhereInput[]
     NOT?: YearScalarWhereInput | YearScalarWhereInput[]
     id?: StringFilter<"Year"> | string
-    name?: StringFilter<"Year"> | string
+    year?: StringFilter<"Year"> | string
     createdAt?: DateTimeFilter<"Year"> | Date | string
     updatedAt?: DateTimeFilter<"Year"> | Date | string
     userId?: StringFilter<"Year"> | string
@@ -6832,7 +6803,6 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    userId: string
     grades?: GradeCreateNestedManyWithoutSubjectInput
   }
 
@@ -6841,7 +6811,6 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    userId: string
     grades?: GradeUncheckedCreateNestedManyWithoutSubjectInput
   }
 
@@ -6909,13 +6878,12 @@ export namespace Prisma {
     name?: StringFilter<"Subject"> | string
     createdAt?: DateTimeFilter<"Subject"> | Date | string
     updatedAt?: DateTimeFilter<"Subject"> | Date | string
-    userId?: StringFilter<"Subject"> | string
     yearId?: StringFilter<"Subject"> | string
   }
 
   export type YearCreateWithoutSubjectsInput = {
     id?: string
-    name: string
+    year: string
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutYearsInput
@@ -6923,7 +6891,7 @@ export namespace Prisma {
 
   export type YearUncheckedCreateWithoutSubjectsInput = {
     id?: string
-    name: string
+    year: string
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: string
@@ -6972,7 +6940,7 @@ export namespace Prisma {
 
   export type YearUpdateWithoutSubjectsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutYearsNestedInput
@@ -6980,7 +6948,7 @@ export namespace Prisma {
 
   export type YearUncheckedUpdateWithoutSubjectsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
@@ -7019,7 +6987,6 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    userId: string
     Year: YearCreateNestedOneWithoutSubjectsInput
   }
 
@@ -7028,7 +6995,6 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    userId: string
     yearId: string
   }
 
@@ -7053,7 +7019,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
     Year?: YearUpdateOneRequiredWithoutSubjectsNestedInput
   }
 
@@ -7062,20 +7027,19 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
     yearId?: StringFieldUpdateOperationsInput | string
   }
 
   export type YearCreateManyUserInput = {
     id?: string
-    name: string
+    year: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type YearUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subjects?: SubjectUpdateManyWithoutYearNestedInput
@@ -7083,7 +7047,7 @@ export namespace Prisma {
 
   export type YearUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subjects?: SubjectUncheckedUpdateManyWithoutYearNestedInput
@@ -7091,7 +7055,7 @@ export namespace Prisma {
 
   export type YearUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    year?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7101,7 +7065,6 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    userId: string
   }
 
   export type SubjectUpdateWithoutYearInput = {
@@ -7109,7 +7072,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
     grades?: GradeUpdateManyWithoutSubjectNestedInput
   }
 
@@ -7118,7 +7080,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
     grades?: GradeUncheckedUpdateManyWithoutSubjectNestedInput
   }
 
@@ -7127,7 +7088,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type GradeCreateManySubjectInput = {

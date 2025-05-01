@@ -24,7 +24,7 @@ model User {
 
 model Year {
   id        String    @id @default(cuid())
-  name      String
+  year      String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   userId    String
@@ -37,7 +37,6 @@ model Subject {
   name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userId    String
   yearId    String
   Year      Year     @relation(fields: [yearId], references: [id])
   grades    Grade[]

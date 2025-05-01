@@ -1,32 +1,73 @@
+### VARIABLES
+
+@devToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNtYTNwODRlaTAwMDB0c3MwYnZ2anRtYmgiLCJpYXQiOjE3NDYxMDQ4NDQsImV4cCI6MTc0NjE5MTI0NH0.FdmQgtHcFw_IBQirXbFC38dCvtsQsPLoJQl1uMwvrO4
+
+@devUserId = cma3p84ei0000tss0bvvjtmbh
+
 ### GET /
 
 GET http://localhost:3000/
 
 ### POST /register (register a new user)
-POST http://localhost:3000/auth/register
-Content-Type: application/json 
+
+POST http://localhost:3000/auth/register 
+Content-Type: application/json
 
 {
     "name": "New User",
-    "email": "testmail@test.com",
+    "email": "testmail@gmail.com",
     "username": "newuser",
     "password": "newpassword"
 }
 
 ### POST /login (login a user)
-POST http://localhost:3000/auth/login
-Content-Type: application/json 
+
+POST http://localhost:3000/auth/login 
+Content-Type: application/json
 
 {
-    "email": "testmail@test.com",
+    "email": "testmail@gmail.com",
     "password": "newpassword"
 }
 
 ### POST /login (login with username)
-POST http://localhost:3000/auth/login
-Content-Type: application/json 
+
+POST http://localhost:3000/auth/login 
+Content-Type: application/json
 
 {
     "username": "newuser",
     "password": "newpassword"
+}
+
+### GET /years (get all years) (protected)
+
+GET http://localhost:3000/years 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "userId": "{{devUserId}}"
+}
+
+### GET /years (get a year by year identifier) (protected)
+
+GET http://localhost:3000/years/year
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "userId": "{{devUserId}}",
+    "year": "25"
+}
+
+### POST /years (create a new year) (protected)
+
+POST http://localhost:3000/years 
+Content-Type: application/json
+Authorization: {{devToken}}
+
+{
+    "year": "2026/27",
+    "userId": "{{devUserId}}"
 }

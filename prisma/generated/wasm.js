@@ -129,7 +129,7 @@ exports.Prisma.UserScalarFieldEnum = {
 
 exports.Prisma.YearScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  year: 'year',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId'
@@ -140,7 +140,6 @@ exports.Prisma.SubjectScalarFieldEnum = {
   name: 'name',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  userId: 'userId',
   yearId: 'yearId'
 };
 
