@@ -1,0 +1,46 @@
+import prisma from "../prismaClient.js";
+
+class AuthRepository {
+  async findUniqueByUsername({ username }) {
+    return await prisma.user.findUnique({
+      where: {
+        username,
+      },
+    });
+  }
+
+  async findUniqueByEmail({ email }) {
+    return await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+  }
+
+  async findUniqueByIdentifier({ identifier }) {
+    return await prisma.user.findUnique({
+        where: identifier,
+    });
+}
+
+  async createUser({ name, email, username, password }) {
+    return await prisma.user.create({
+      data: {
+        name,
+        email,
+        username,
+        password,
+      },
+    });
+  }
+
+  async deleteUser({ id }) {
+    return await prisma.user.delete({
+      where: {
+        id,
+      },
+    });
+  }
+}
+
+export default new AuthRepository();

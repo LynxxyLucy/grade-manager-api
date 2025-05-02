@@ -2,6 +2,7 @@ import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import prisma from "../prismaClient.js"; // Import the Prisma client
+import repo from "../repositories/authRepository.js"; // Import the repository
 
 const router = express.Router();
 
@@ -15,21 +16,14 @@ router.post("/register", async (req, res) => {
   try {
     // Check if the user already exists
     //const identifier = email ? { email } : { username }; // Use email or username to find the user
-    const user = await prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
-    if (user) {
+
+    const findUsername = await repo.findUniqueByUsername({ username });
+    if (findUsername) {
       return res.status(400).json({ message: "Username already exists." }); // Bad Request
     }
 
-    const emailAdress = await prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
-    if (emailAdress) {
+    const findEmail = await repo.findUniqueByEmail({ email });
+    if (findEmail) {
       return res.status(400).json({ message: "Email already registered." }); // Bad Request
     }
 
@@ -37,13 +31,11 @@ router.post("/register", async (req, res) => {
     const hashedPassword = bcrypt.hashSync(password, 16);
 
     // Create a new user
-    const newUser = await prisma.user.create({
-      data: {
-        name: name,
-        email: email,
-        username: username,
-        password: hashedPassword,
-      },
+    const newUser = await repo.createUser({
+      name,
+      email,
+      username,
+      password: hashedPassword,
     });
 
     // Generate a JWT token
@@ -54,12 +46,7 @@ router.post("/register", async (req, res) => {
     // Send the token and user data in the response
     res.status(201).json({
       token,
-      user: {
-        id: newUser.id,
-        name: newUser.name,
-        email: newUser.email,
-        username: newUser.username,
-      },
+      user: newUser,
     });
   } catch (error) {
     console.log(error);
@@ -73,14 +60,11 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   // Destructure request body
   const { email, username, password } = req.body;
-  let user;
 
   try {
     // Check if the user exists
     const identifier = email ? { email } : { username }; // Use email or username to find the user
-    user = await prisma.user.findUnique({
-      where: identifier,
-    });
+    const user = await repo.findUniqueByIdentifier({ identifier });
 
     // If user not found, return error
     if (!user) {
@@ -121,11 +105,7 @@ router.delete("/delete/:id", async (req, res) => {
 
   try {
     // Delete the user
-    await prisma.user.delete({
-      where: {
-        id,
-      },
-    });
+    await repo.deleteUser({ id });
 
     res.sendStatus(204); // No Content
   } catch (error) {
