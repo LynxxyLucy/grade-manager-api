@@ -43,24 +43,28 @@ Content-Type: application/json
 Authorization: {{devToken}}
 
 {
-    "semester": "asdfasdf",
+    "semester": "test",
     "userId": "{{devUserId}}"
 }
 
 ### PUT /semesters/:id (update a semester) (protected)
 
-PUT http://localhost:3000/semesters/{{semesterId}} 
+@updateId = cma5f7fmz0001tscj9a24y61x
+
+PUT http://localhost:3000/semesters/{{updateId}} 
 Content-Type: application/json
 Authorization: {{devToken}}
 
 {
-    "semester": "2024/25lololol",
+    "semester": "2024/kdkdkdkd",
     "userId": "{{devUserId}}"
 }
 
 ### DELETE /semesters/:id (delete a semester) (protected)
 
-DELETE http://localhost:3000/semesters/{{semesterId}} 
+@deleteId = cma5f7fmz0001tscj9a24y61x
+
+DELETE http://localhost:3000/semesters/{{deleteId}} 
 Content-Type: application/json
 Authorization: {{devToken}}
 

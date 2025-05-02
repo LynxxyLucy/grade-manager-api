@@ -24,14 +24,14 @@ Authorization: {{devToken}}
 
 {
     "subjectId": "{{subjectId}}",
-    "grade": "3.0",
+    "grade": "5.0",
     "type": "Stegreifaufgabe",
     "date": "2025-01-05"
 }
 
 ### PUT /grades (update a grade) (protected)
 
-@gradeId = cma5lakt300055bh3fx84xjz4
+@gradeId = cma6hhv510001tsj6umlmjrps
 
 PUT http://localhost:3000/grades/{{gradeId}} 
 Content-Type: application/json
@@ -45,7 +45,7 @@ Authorization: {{devToken}}
 
 ### DELETE /grades (delete a grade) (protected)
 
-@gradeId = cma5lakt300055bh3fx84xjz4
+@gradeId = cma6hhv510001tsj6umlmjrps
 
 DELETE http://localhost:3000/grades/{{gradeId}} 
 Content-Type: application/json

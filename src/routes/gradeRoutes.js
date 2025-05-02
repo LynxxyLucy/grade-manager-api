@@ -1,5 +1,5 @@
 import express from "express";
-import prisma from "../prismaClient.js";
+import repo from "../repositories/gradeRepository.js";
 
 const router = express.Router();
 
@@ -8,12 +8,7 @@ router.get("/", async (req, res) => {
   const { subjectId } = req.query;
 
   try {
-    const grades = await prisma.grade.findMany({
-      where: {
-        subjectId,
-      },
-    });
-
+    const grades = await repo.findMany({ subjectId });
     res.status(200).json(grades); // Send the grades in the response
   } catch (error) {
     console.log(error.message);
@@ -26,15 +21,7 @@ router.post("/", async (req, res) => {
   const { subjectId, grade, type, date } = req.body; // Get subjectId, name, and value from request body
 
   try {
-    const newGrade = await prisma.grade.create({
-      data: {
-        subjectId,
-        grade,
-        type,
-        date,
-      },
-    });
-
+    const newGrade = await repo.create({ subjectId, grade, type, date });
     res.status(201).json({ message: "Grade created.", newGrade }); // Send the new grade in the response
   } catch (error) {
     console.log(error.message);
@@ -48,17 +35,7 @@ router.put("/:id", async (req, res) => {
   const { grade, type, date } = req.body; // Get name and value from request body
 
   try {
-    const updatedGrade = await prisma.grade.update({
-      where: {
-        id,
-      },
-      data: {
-        grade,
-        type,
-        date,
-      },
-    });
-
+    const updatedGrade = await repo.update({ id, grade, type, date });
     res.status(200).json({ message: "Grade updated.", updatedGrade }); // Send the updated grade in the response
   } catch (error) {
     console.log(error.message);
@@ -71,12 +48,7 @@ router.delete("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    const deletedGrade = await prisma.grade.delete({
-      where: {
-        id,
-      },
-    });
-
+    const deletedGrade = await repo.delete({ id });
     res.status(200).json({ message: "Grade deleted.", deletedGrade }); // Send the success message in the response
   } catch (error) {
     console.log(error.message);

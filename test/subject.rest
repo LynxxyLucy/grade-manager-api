@@ -31,13 +31,15 @@ Content-Type: application/json
 Authorization: {{devToken}}
 
 {
-    "name": "AEuP",
+    "name": "Test",
     "semesterId": "{{semesterId}}"
 }
 
 ### UPDATE /subjects/:id (update a subject) (protected)
 
-PUT http://localhost:3000/subjects/{{subjectId}}
+@updateId = cma6j27310001ts7cxsxh8jxw
+
+PUT http://localhost:3000/subjects/{{updateId}}
 Content-Type: application/json
 Authorization: {{devToken}}
 
@@ -47,6 +49,8 @@ Authorization: {{devToken}}
 
 ### DELETE /subjects/:id (delete a subject) (protected)
 
-DELETE http://localhost:3000/subjects/{{subjectId}} 
+@deleteId = cma6j27310001ts7cxsxh8jxw
+
+DELETE http://localhost:3000/subjects/{{deleteId}} 
 Content-Type: application/json
 Authorization: {{devToken}}
