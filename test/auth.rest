@@ -16,9 +16,9 @@ POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "name": "wegwerf",
-    "email": "testmail@gmail.com",
-    "username": "newuser",
+    "name": "New User",
+    "email": "testmail2@gmail.com",
+    "username": "newuser2",
     "password": "newpassword"
 }
 
@@ -28,7 +28,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "email": "testmail@gmail.com",
+    "email": "testmail2@gmail.com",
     "password": "newpassword"
 }
 
@@ -43,7 +43,7 @@ Content-Type: application/json
 }
 
 ### DELETE /delete (delete a user) (protected)
-@deletionId = cma5jp7xw00005brvxtfw9wam
+@deletionId = cma5ltyit00005bzq1qqzpx16
 DELETE http://localhost:3000/auth/delete/{{deletionId}}
 Content-Type: application/json
 Authorization: {{adminToken}}
