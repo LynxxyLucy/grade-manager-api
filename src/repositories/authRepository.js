@@ -23,7 +23,7 @@ class AuthRepository {
     });
 }
 
-  async createUser({ name, email, username, password }) {
+  async create({ name, email, username, password }) {
     return await prisma.user.create({
       data: {
         name,
@@ -34,7 +34,7 @@ class AuthRepository {
     });
   }
 
-  async deleteUser({ id }) {
+  async delete({ id }) {
     return await prisma.user.delete({
       where: {
         id,

@@ -2,6 +2,7 @@ import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import repo from "../repositories/authRepository.js"; // Import the repository
+import service from "../services/authService.js";
 
 const router = express.Router();
 
@@ -14,23 +15,20 @@ router.post("/register", async (req, res) => {
 
   try {
     // Check if the user already exists
-    //const identifier = email ? { email } : { username }; // Use email or username to find the user
-
     const findUsername = await repo.findUniqueByUsername({ username });
+    const findEmail = await repo.findUniqueByEmail({ email });
     if (findUsername) {
       return res.status(400).json({ message: "Username already exists." }); // Bad Request
     }
-
-    const findEmail = await repo.findUniqueByEmail({ email });
     if (findEmail) {
       return res.status(400).json({ message: "Email already registered." }); // Bad Request
     }
 
     // Hash the password
-    const hashedPassword = bcrypt.hashSync(password, 16);
+    const hashedPassword = service.hashPass(password);
 
     // Create a new user
-    const newUser = await repo.createUser({
+    const newUser = await repo.create({
       name,
       email,
       username,
@@ -38,12 +36,10 @@ router.post("/register", async (req, res) => {
     });
 
     // Generate a JWT token
-    const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {
-      expiresIn: "24h",
-    });
+    const token = service.generateToken(newUser.id);
 
     // Send the token and user data in the response
-    res.status(201).json({
+    return res.status(201).json({
       token,
       user: newUser,
     });
@@ -71,15 +67,13 @@ router.post("/login", async (req, res) => {
     }
 
     // Compare the password with the hashed password
-    const isPasswordValid = bcrypt.compareSync(password, user.password);
+    const isPasswordValid = service.validatePass(password, user);
     if (!isPasswordValid) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
     // Generate a JWT token
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-      expiresIn: "24h",
-    });
+    const token = service.generateToken(user.id);
 
     // Send the token and user data in the response
     res.status(200).json({
@@ -105,7 +99,6 @@ router.delete("/delete/:id", async (req, res) => {
   try {
     // Delete the user
     await repo.deleteUser({ id });
-
     res.sendStatus(204); // No Content
   } catch (error) {
     console.log(error.message);
