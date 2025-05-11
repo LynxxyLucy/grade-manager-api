@@ -1,6 +1,14 @@
 import prisma from "../prismaClient.js";
 
 class AuthRepository {
+  async findById({ id }) {
+    return await prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
+
   async findUniqueByUsername({ username }) {
     return await prisma.user.findUnique({
       where: {
@@ -19,9 +27,9 @@ class AuthRepository {
 
   async findUniqueByIdentifier({ identifier }) {
     return await prisma.user.findUnique({
-        where: identifier,
+      where: identifier,
     });
-}
+  }
 
   async create({ name, email, username, password }) {
     return await prisma.user.create({

@@ -3,105 +3,61 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import repo from "../repositories/authRepository.js"; // Import the repository
 import service from "../services/authService.js";
+import {
+  ConflictError,
+  InvalidError,
+  NotFoundError,
+} from "../utils/customErrors.js";
 
 const router = express.Router();
 
-/*
- * Register a new user
- */
+// MARK:  REGISTER
 router.post("/register", async (req, res) => {
   const { name, email, username, password } = req.body; // destructure request body
   console.log(req.body);
 
   try {
-    // Check if the user already exists
-    const findUsername = await repo.findUniqueByUsername({ username });
-    const findEmail = await repo.findUniqueByEmail({ email });
-    if (findUsername) {
-      return res.status(400).json({ message: "Username already exists." }); // Bad Request
-    }
-    if (findEmail) {
-      return res.status(400).json({ message: "Email already registered." }); // Bad Request
-    }
-
-    // Hash the password
-    const hashedPassword = service.hashPass(password);
-
-    // Create a new user
-    const newUser = await repo.create({
-      name,
-      email,
-      username,
-      password: hashedPassword,
-    });
-
-    // Generate a JWT token
-    const token = service.generateToken(newUser.id);
-
-    // Send the token and user data in the response
-    return res.status(201).json({
-      token,
-      user: newUser,
-    });
+    const newUser = await service.registerUser(name, email, username, password);
+    return res.status(201).json({ message: "New user created.", newUser });
   } catch (error) {
     console.log(error);
-    res.sendStatus(500); // Internal Server Error
+    if (error instanceof ConflictError) {
+      return res.status(400).json({ message: error.message });
+    }
+    return res.status(500).json({ message: error.message }); // Internal Server Error
   }
 });
 
-/*
- * Login a user
- */
+// MARK:  LOGIN
 router.post("/login", async (req, res) => {
   // Destructure request body
   const { email, username, password } = req.body;
 
   try {
-    // Check if the user exists
-    const identifier = email ? { email } : { username }; // Use email or username to find the user
-    const user = await repo.findUniqueByIdentifier({ identifier });
-
-    // If user not found, return error
-    if (!user) {
-      return res.status(400).json({ message: "Invalid credentials" });
-    }
-
-    // Compare the password with the hashed password
-    const isPasswordValid = service.validatePass(password, user);
-    if (!isPasswordValid) {
-      return res.status(400).json({ message: "Invalid credentials" });
-    }
-
-    // Generate a JWT token
-    const token = service.generateToken(user.id);
-
-    // Send the token and user data in the response
-    res.status(200).json({
-      token,
-      user: {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-      },
-    });
+    const login = await service.loginUser(email, username, password);
+    return res.status(200).json({ message: "Login succesful!", login });
   } catch (error) {
     console.log(error.message);
-    return res.sendStatus(500); // Internal Server Error
+    if (error instanceof InvalidError) {
+      return res.status(400).json({ message: error.message }); // Bad Request
+    }
+    return res.status(500).json({ message: error.message }); // Internal Server Error
   }
 });
 
-/*
- * DELETE a user
- */
+// MARK:  DELETE
 router.delete("/delete/:id", async (req, res) => {
   const { id } = req.params; // Get userId from request parameters
 
   try {
     // Delete the user
-    await repo.deleteUser({ id });
-    res.sendStatus(204); // No Content
+    const toDelete = await service.deleteUser(id);
+    res.status(200).json({ message: `User '${toDelete.username}' deleted.` }); // No Content
   } catch (error) {
     console.log(error.message);
+    if (error instanceof NotFoundError) {
+      return res.status(404).json({ message: error.message });
+    }
     return res.sendStatus(500); // Internal Server Error
   }
 });

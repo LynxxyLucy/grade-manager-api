@@ -17,8 +17,8 @@ Content-Type: application/json
 
 {
     "name": "New User",
-    "email": "testmail6@gmail.com",
-    "username": "newuser6",
+    "email": "testmail6d4@gmail.com",
+    "username": "newuser6d4",
     "password": "newpassword"
 }
 
@@ -43,7 +43,7 @@ Content-Type: application/json
 }
 
 ### DELETE /delete (delete a user) (protected)
-@deletionId = cma5ltyit00005bzq1qqzpx16
+@deletionId = cmajp9hg80000tszx5oplpymr
 DELETE http://localhost:3000/auth/delete/{{deletionId}}
 Content-Type: application/json
 Authorization: {{adminToken}}
