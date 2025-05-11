@@ -1,6 +1,10 @@
 import prisma from "../prismaClient.js";
 
 class AuthRepository {
+  async findAll() {
+    return await prisma.user.findMany();
+  }
+
   async findById({ id }) {
     return await prisma.user.findUnique({
       where: {

@@ -10,6 +10,9 @@
 
 GET http://localhost:3000/
 
+### GET ALL USERS
+GET http://localhost:3000/auth/
+
 ### POST /register (register a new user)
 
 POST http://localhost:3000/auth/register 
@@ -17,9 +20,20 @@ Content-Type: application/json
 
 {
     "name": "New User",
-    "email": "testmail6d4@gmail.com",
-    "username": "newuser6d4",
+    "email": "testmail6dd4@gmail.com",
+    "username": "newuser",
     "password": "newpassword"
+}
+
+### post
+POST http://localhost:3000/auth/register 
+Content-Type: application/json
+
+{
+    "name": "dd",
+    "email": "dddtest.com",
+    "username": "ddd",
+    "password": "daaaa"
 }
 
 ### POST /login (login a user)

@@ -6,8 +6,14 @@ import {
   InvalidError,
   NotFoundError,
 } from "../utils/customErrors.js";
+import Joi from "joi";
 
 class AuthService {
+  // MARK: FIND ALL USERS
+  async findAllUsers() {
+    return await repo.findAll();
+  }
+
   // MARK:  REGISTER USER
   async registerUser(name, email, username, password) {
     // Check if the user already exists

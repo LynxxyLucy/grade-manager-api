@@ -1,27 +1,46 @@
 import express from "express";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import repo from "../repositories/authRepository.js"; // Import the repository
 import service from "../services/authService.js";
 import {
   ConflictError,
   InvalidError,
   NotFoundError,
 } from "../utils/customErrors.js";
+import { registerSchema } from "../utils/userSchemas.js";
 
 const router = express.Router();
 
+// MARK: FIND ALL
+router.get("/", async (req, res) => {
+  try {
+    const allUsers = await service.findAllUsers();
+    return res.status(200).json(allUsers);
+  } catch (e) {
+    console.log(e.message);
+    return res.status(500).json({ error: e.message });
+  }
+});
+
 // MARK:  REGISTER
 router.post("/register", async (req, res) => {
-  const { name, email, username, password } = req.body; // destructure request body
   console.log(req.body);
 
   try {
-    const newUser = await service.registerUser(name, email, username, password);
+    // Validate Input
+    const { error: e, value: v } = registerSchema.validate(req.body);
+    if (e) {
+      throw new InvalidError(e);
+    }
+
+    const newUser = await service.registerUser(
+      v.name,
+      v.email,
+      v.username,
+      v.password
+    );
     return res.status(201).json({ message: "New user created.", newUser });
   } catch (error) {
     console.log(error);
-    if (error instanceof ConflictError) {
+    if (error instanceof ConflictError || InvalidError) {
       return res.status(400).json({ message: error.message });
     }
     return res.status(500).json({ message: error.message }); // Internal Server Error
@@ -39,9 +58,9 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     console.log(error.message);
     if (error instanceof InvalidError) {
-      return res.status(400).json({ message: error.message }); // Bad Request
+      return res.status(400).json({ error: error.message }); // Bad Request
     }
-    return res.status(500).json({ message: error.message }); // Internal Server Error
+    return res.status(500).json({ error: error.message }); // Internal Server Error
   }
 });
 
