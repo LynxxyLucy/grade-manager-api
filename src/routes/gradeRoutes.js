@@ -8,7 +8,8 @@ router.get("/", async (req, res) => {
   const { subjectId } = req.query;
 
   try {
-    const grades = await repo.findMany({ subjectId });
+    //const grades = await service.getAllGradesForSubject(subjectId);
+    const grades = await repo.getAllForSubject({ subjectId });
     res.status(200).json(grades); // Send the grades in the response
   } catch (error) {
     console.log(error.message);

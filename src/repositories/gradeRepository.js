@@ -1,10 +1,18 @@
 import prisma from "../prismaClient.js";
 
 class GradeRepository {
-  async findMany({ subjectId }) {
+  async getAllForSubject({ subjectId }) {
     return await prisma.grade.findMany({
       where: {
         subjectId,
+      },
+    });
+  }
+
+  async checkSubjectExistance({ subjectId }) {
+    return await prisma.subject.findUnique({
+      where: {
+        id: subjectId,
       },
     });
   }

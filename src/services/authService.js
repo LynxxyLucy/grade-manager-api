@@ -6,7 +6,6 @@ import {
   InvalidError,
   NotFoundError,
 } from "../utils/customErrors.js";
-import Joi from "joi";
 
 class AuthService {
   // MARK: FIND ALL USERS
