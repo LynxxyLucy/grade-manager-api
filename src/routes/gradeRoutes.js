@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Get all grades of a subject
 router.get("/", async (req, res) => {
-  const { subjectId } = req.query;
+  const { subjectId } = req.body;
 
   try {
     //const grades = await service.getAllGradesForSubject(subjectId);
